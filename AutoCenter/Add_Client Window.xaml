@@ -3,15 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add_Client_Window" Height="312.132" Width="454.412">
     <Grid>
-        <TextBox Name="client_name_textbox" HorizontalAlignment="Left" Height="23" Margin="213,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="client_lastname_textbox" HorizontalAlignment="Left" Height="23" Margin="213,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="client_name_textbox" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="213,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="client_lastname_textbox" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="213,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <DatePicker Name="client_dateofbirth_datepicker" HorizontalAlignment="Left" Margin="213,139,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,53,0,0" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Height="23" Width="85"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="85"><Run Text="Last Name"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="50,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="85"><Run Text="Date Of Birth"/><LineBreak/><Run/></TextBlock>
         <Button Name="add_client_button" Content="Add" HorizontalAlignment="Left" Margin="258,234,0,0" VerticalAlignment="Top" Width="75" Click="add_client_button_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="85"><Run Text="Telephone"/><LineBreak/><Run/></TextBlock>
-        <TextBox Name="client_telephone_textbox" HorizontalAlignment="Left" Height="23" Margin="213,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
+        <TextBox Name="client_telephone_textbox" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="213,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
