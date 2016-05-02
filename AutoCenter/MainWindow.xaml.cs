@@ -21,7 +21,6 @@ namespace AutoCenter
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\v11.0;AttachDbFilename=" + System.IO.Path.GetFullPath("../../DB.mdf") + ";Integrated Security=True;Connect Timeout=30");
         private SqlConnection connection = new SqlConnection("Data Source=ROMAPC\\SQLEXPRESS;Initial Catalog=Car_Center;Integrated Security=True");
 
         public static SqlConnection Connection { get; set; }
@@ -39,6 +38,9 @@ namespace AutoCenter
             GetClients(Connection, client_listbox);
         }
 
+        /// <summary>
+        /// Метод, который добавляет клиента в базу и программу
+        /// </summary>
         private void add_client_button_Click_1(object sender, RoutedEventArgs e)
         {
             try
@@ -54,11 +56,12 @@ namespace AutoCenter
                                     InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
                     {
                         MainWindow.Connection.Open();
-                        cmd = new SqlCommand("Insert into [Customer] (First_Name, Last_Name, Birth_Date) values" +
-                            " (@First_Name, @Last_Name, @Birth_Date)", Connection);
+                        cmd = new SqlCommand("Insert into [Customer] (First_Name, Last_Name, Birth_Date, Telephone) values" +
+                            " (@First_Name, @Last_Name, @Birth_Date, @Telephone)", Connection);
                         cmd.Parameters.AddWithValue("@First_Name", client_window.client_name_textbox.Text);
                         cmd.Parameters.AddWithValue("@Last_Name", client_window.client_lastname_textbox.Text);
                         cmd.Parameters.AddWithValue("@Birth_Date", client_window.client_dateofbirth_datepicker.SelectedDate);
+                        cmd.Parameters.AddWithValue("@Telephone", client_window.client_telephone_textbox.Text);
                         cmd.ExecuteNonQuery();
                         MainWindow.Connection.Close();
 
@@ -111,18 +114,18 @@ namespace AutoCenter
             }
         }
 
+        /// <summary>
+        /// Метод, который получает Id клиента по номеру его телефона
+        /// </summary>
         private int GetClientId(SqlConnection connection, string name, string last_name)
         {
             int id = 0;
             try
             {
                 connection.Open();
-                var id_query = new SqlCommand(("Select Customer_Id from [Customer] where First_Name like '"+
-                    client_listbox.SelectedItem.ToString().Split(' ')[0]+"' and Last_Name like '"+
-                    client_listbox.SelectedItem.ToString().Split(' ')[1]+"'"), connection);
-                
+                var id_query = new SqlCommand(("Select Customer_Id from [Customer] where Telephone like '"+
+                    client_listbox.SelectedItem.ToString().Split(':')[1])+"'", connection);
                 SqlDataReader reader = id_query.ExecuteReader();
-
                 while(reader.Read())
                     id = reader.GetInt32(0);
                 
@@ -142,14 +145,18 @@ namespace AutoCenter
             return id;
         }
 
+        /// <summary>
+        /// Метод, который получает клиентов из базы и добавляет в программу
+        /// </summary>
         private void GetClients(SqlConnection connection, ListBox listbox)
         {
             listbox.Items.Clear();
             connection.Open();
-            var clients = new SqlCommand(("select First_Name, Last_Name, Birth_Date from Customer"), connection);
+            var clients = new SqlCommand(("select First_Name, Last_Name, Birth_Date, Telephone from Customer"), connection);
             SqlDataReader reader = clients.ExecuteReader();
             while (reader.Read())
-                listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ")");
+                listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ")" + " :"+
+                    reader.GetString(3));
 
             connection.Close();
         }
