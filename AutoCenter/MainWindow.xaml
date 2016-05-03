@@ -4,13 +4,21 @@
         Title="MainWindow" Height="535.074" Width="1171.268">
     <Grid>
         <ListBox Name="client_listbox" HorizontalAlignment="Left" Height="347" Margin="13,77,0,0" VerticalAlignment="Top" Width="269"/>
-        <Button Name="add_client_button" Content="Add" HorizontalAlignment="Left" Margin="37,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="add_client_button_Click_1"/>
+        <Button Name="add_client_button" Content=" Add&#xA;Client" HorizontalAlignment="Left" Margin="37,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_client_button_Click_1"/>
         <TextBlock HorizontalAlignment="Left" Margin="132,54,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="42"/>
-        <Button Name="delete_client_button" Content="Delete" HorizontalAlignment="Left" Margin="167,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="delete_client_button_Click"/>
-        <ListBox Name="emps_listbox" HorizontalAlignment="Left" Height="347" Margin="306,77,0,0" VerticalAlignment="Top" Width="288"/>
-        <Button Name="add_emp_button" Content="Add" HorizontalAlignment="Left" Margin="332,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="add_emp_button_Click"/>
-        <Button Name="delete_emp_button" Content="Delete" HorizontalAlignment="Left" Margin="465,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="delete_emp_button_Click"/>
+        <Button Name="delete_client_button" Content="Delete&#xD;&#xA;Client" HorizontalAlignment="Left" Margin="167,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_client_button_Click"/>
+        <ListBox Name="emps_listbox" HorizontalAlignment="Left" Height="347" Margin="306,77,0,0" VerticalAlignment="Top" Width="288" SelectionChanged="emps_listbox_SelectionChanged"/>
+        <Button Name="add_emp_button" Content="Add&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="332,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_emp_button_Click"/>
+        <Button Name="delete_emp_button" Content="Delete&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="465,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_emp_button_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="419,54,0,0" TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Height="23" Width="64"/>
+        <ListBox Name="rental_cars_listbox" HorizontalAlignment="Left" Height="189" Margin="619,38,0,0" VerticalAlignment="Top" Width="390"/>
+        <ListBox Name="sales_cars_listbox" HorizontalAlignment="Left" Height="189" Margin="619,285,0,0" VerticalAlignment="Top" Width="390"/>
+        <TextBlock HorizontalAlignment="Left" Margin="783,15,0,0" TextWrapping="Wrap" Text="Cars for Rent" VerticalAlignment="Top" Height="23" Width="76"/>
+        <TextBlock HorizontalAlignment="Left" Margin="783,262,0,0" TextWrapping="Wrap" Text="Cars for Sale" VerticalAlignment="Top" Height="23" Width="76"/>
+        <Button Name="add_rentalCar_button" Content="Add Car&#xD;&#xA; For Rent" HorizontalAlignment="Left" Margin="1035,77,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
+        <Button Name="delete_rentalCar_button" Content="Delete Car&#xD;&#xA;For Rent" HorizontalAlignment="Left" Margin="1035,134,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
+        <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
+        <Button Name="delete_salesCar_button" Content="Delete Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,392,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
 
     </Grid>
 </Window>
