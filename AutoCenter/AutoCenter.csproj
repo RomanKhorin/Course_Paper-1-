@@ -69,6 +69,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Add Employee Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Add_Client Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Add Employee Window.xaml.cs">
+      <DependentUpon>Add Employee Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Add_Client Window.xaml.cs">
       <DependentUpon>Add_Client Window.xaml</DependentUpon>
     </Compile>

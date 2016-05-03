@@ -1,12 +1,16 @@
 ﻿<Window x:Class="AutoCenter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="426.119" Width="1153.358">
+        Title="MainWindow" Height="535.074" Width="1171.268">
     <Grid>
-        <ListBox Name="client_listbox" HorizontalAlignment="Left" Height="347" Margin="10,38,0,0" VerticalAlignment="Top" Width="451"/>
-        <Button Name="add_client_button" Content="Add" HorizontalAlignment="Left" Margin="908,38,0,0" VerticalAlignment="Top" Width="127" Height="32" Click="add_client_button_Click_1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="189,10,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="121"/>
-        <Button x:Name="delete_client_button" Content="Delete" HorizontalAlignment="Left" Margin="908,93,0,0" VerticalAlignment="Top" Width="127" Height="32" Click="delete_client_button_Click"/>
+        <ListBox Name="client_listbox" HorizontalAlignment="Left" Height="347" Margin="13,77,0,0" VerticalAlignment="Top" Width="269"/>
+        <Button Name="add_client_button" Content="Add" HorizontalAlignment="Left" Margin="37,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="add_client_button_Click_1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="132,54,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="42"/>
+        <Button Name="delete_client_button" Content="Delete" HorizontalAlignment="Left" Margin="167,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="delete_client_button_Click"/>
+        <ListBox Name="emps_listbox" HorizontalAlignment="Left" Height="347" Margin="306,77,0,0" VerticalAlignment="Top" Width="288"/>
+        <Button Name="add_emp_button" Content="Add" HorizontalAlignment="Left" Margin="332,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="add_emp_button_Click"/>
+        <Button Name="delete_emp_button" Content="Delete" HorizontalAlignment="Left" Margin="465,442,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="delete_emp_button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="419,54,0,0" TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Height="23" Width="64"/>
 
     </Grid>
 </Window>

@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add_Client_Window" Height="312.132" Width="454.412">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="52*"/>
+        </Grid.ColumnDefinitions>
         <TextBox Name="client_name_textbox" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="213,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="client_lastname_textbox" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="213,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <DatePicker Name="client_dateofbirth_datepicker" HorizontalAlignment="Left" Margin="213,139,0,0" VerticalAlignment="Top" Width="120"/>
