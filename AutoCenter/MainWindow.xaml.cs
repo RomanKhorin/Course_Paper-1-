@@ -363,7 +363,7 @@ namespace AutoCenter
             {
                 listbox.Items.Clear();
                 connection.Open();
-                var rental_cars = new SqlCommand("select Car_Number, Firm, Model from [Rental_Car] where Center_Id like "+ CurrentCenter , connection);
+                var rental_cars = new SqlCommand("select Car_Number, Firm, Model from [Rental_Car] where Center_Id like " + CurrentCenter, connection);
                 reader = rental_cars.ExecuteReader();
 
                 while (reader.Read())
@@ -391,7 +391,7 @@ namespace AutoCenter
             {
                 listbox.Items.Clear();
                 connection.Open();
-                var sales_cars = new SqlCommand("select Firm, Model from [Sales_Car] where Center_Id like " + CurrentCenter , connection);
+                var sales_cars = new SqlCommand("select Firm, Model from [Sales_Car] where Center_Id like " + CurrentCenter, connection);
                 reader = sales_cars.ExecuteReader();
 
                 while (reader.Read())
@@ -457,6 +457,55 @@ namespace AutoCenter
             {
                 CurrentEmpId = 0;
                 CurrentCenter = 0;
+            }
+        }
+
+        /// <summary>
+        /// Метод, который добавляет машину на продажу в систему и базу
+        /// </summary>
+        private void add_salesCar_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Add_Sales_Car_Window sc_wind = new Add_Sales_Car_Window();
+
+                GetCenters(Connection, sc_wind.center_combobox, reader);
+
+                bool? result = sc_wind.ShowDialog();
+                if (result.Value == true)
+                {
+                    if (String.IsNullOrEmpty(sc_wind.firm_textbox.Text) == false &&
+                            String.IsNullOrEmpty(sc_wind.model_textbox.Text) == false &&
+                                sc_wind.center_combobox.SelectedItem != null &&
+                                    InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand("insert into [Sales_Car] (Firm, Model, Colour, Engine, Country, Center_Id) " +
+                                "values (@Firm, @Model, @Colour, @Engine, @Country, @Center_Id)", Connection);
+                        cmd.Parameters.AddWithValue("@Firm", sc_wind.firm_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Model", sc_wind.model_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Colour", sc_wind.color_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Engine", sc_wind.engine_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Country", sc_wind.country_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Center_Id", sc_wind.center_combobox.SelectedItem);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
+
+                        GetCarsForSale(Connection, sales_cars_listbox, reader);
+                    }
+                    else
+                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
             }
         }
     }

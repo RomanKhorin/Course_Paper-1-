@@ -17,7 +17,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="783,262,0,0" TextWrapping="Wrap" Text="Cars for Sale" VerticalAlignment="Top" Height="23" Width="76"/>
         <Button Name="add_rentalCar_button" Content="Add Car&#xD;&#xA; For Rent" HorizontalAlignment="Left" Margin="1035,77,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
         <Button Name="delete_rentalCar_button" Content="Delete Car&#xD;&#xA;For Rent" HorizontalAlignment="Left" Margin="1035,134,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
-        <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
+        <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_salesCar_button_Click"/>
         <Button Name="delete_salesCar_button" Content="Delete Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,392,0,0" VerticalAlignment="Top" Width="100" Height="36"/>
 
     </Grid>
