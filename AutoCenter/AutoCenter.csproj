@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Add Rental Car Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Add Sales Car Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +91,9 @@
     </Page>
     <Compile Include="Add Employee Window.xaml.cs">
       <DependentUpon>Add Employee Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add Rental Car Window.xaml.cs">
+      <DependentUpon>Add Rental Car Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Add Sales Car Window.xaml.cs">
       <DependentUpon>Add Sales Car Window.xaml</DependentUpon>

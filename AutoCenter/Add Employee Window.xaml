@@ -14,6 +14,5 @@
         <TextBox MaxLength="20" Name="emp_phone_textbox" HorizontalAlignment="Left" Height="23" Margin="234,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="88,221,0,0" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top" Height="22" Width="73"/>
         <Button IsDefault="True" Name="add_emp_button" Content="Add Employee" HorizontalAlignment="Left" Margin="253,267,0,0" VerticalAlignment="Top" Width="101" Height="27" Click="add_emp_button_Click"/>
-
     </Grid>
 </Window>

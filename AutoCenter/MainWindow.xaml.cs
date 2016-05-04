@@ -400,7 +400,7 @@ namespace AutoCenter
                 reader = sales_cars.ExecuteReader();
 
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " (" + reader.GetString(1)+ " " + reader.GetString(2) +")");
+                    listbox.Items.Add(reader.GetString(0) + " (" + reader.GetString(1) + " " + reader.GetString(2) + ")");
 
                 connection.Close();
             }
@@ -571,6 +571,66 @@ namespace AutoCenter
                 Connection.Close();
 
                 GetCarsForSale(Connection, sales_cars_listbox, reader);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Метод, который добавляет машину аренды в базу и систему
+        /// </summary>
+        private void add_rentalCar_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Add_Rental_Car_Window rc_wind = new Add_Rental_Car_Window();
+
+                Connection.Open();
+                var condition_query = new SqlCommand("select * from [Condition]", Connection);
+                reader = condition_query.ExecuteReader();
+                while (reader.Read())
+                    rc_wind.condition_combobox.Items.Add(reader.GetInt32(0) + " (" + reader.GetString(1) + ")");
+                Connection.Close();
+
+                GetCenters(Connection, rc_wind.center_combobox, reader);
+
+                bool? result = rc_wind.ShowDialog();
+                if (result.Value == true)
+                {
+                    if (String.IsNullOrEmpty(rc_wind.car_number_textbox.Text) == false &&
+                            String.IsNullOrEmpty(rc_wind.firm_textbox.Text) == false &&
+                                String.IsNullOrEmpty(rc_wind.model_textbox.Text) == false &&
+                                    rc_wind.condition_combobox.SelectedItem != null &&
+                                        rc_wind.center_combobox.SelectedItem != null &&
+                                            InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand("insert into [Rental_Car] (Car_Number, Firm, Model, Colour, Engine, Country, Condition_Number, Center_Id) " +
+                                 "values (@Car_Number, @Firm, @Model, @Colour, @Engine, @Country, @Condition_Number, @Center_Id)", Connection);
+                        cmd.Parameters.AddWithValue("@Car_Number", rc_wind.car_number_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Firm", rc_wind.firm_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Model", rc_wind.model_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Colour", rc_wind.color_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Engine", rc_wind.engine_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Country", rc_wind.country_textbox.Text);
+                        cmd.Parameters.AddWithValue("@Condition_Number", (int.Parse(rc_wind.condition_combobox.SelectedItem.ToString().Split(' ')[0])));
+                        cmd.Parameters.AddWithValue("@Center_Id", rc_wind.center_combobox.SelectedItem);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
+
+                        GetCarsForRent(Connection, rental_cars_listbox, reader);
+                    }
+                    else
+                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (SqlException ex)
             {

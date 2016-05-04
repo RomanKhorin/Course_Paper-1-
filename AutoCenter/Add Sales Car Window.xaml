@@ -10,7 +10,7 @@
         <TextBox MaxLength="20" Name="engine_textbox" HorizontalAlignment="Left" Height="23" Margin="214,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <TextBox MaxLength="20" Name="country_textbox" HorizontalAlignment="Left" Height="23" Margin="214,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <ComboBox Name="center_combobox" HorizontalAlignment="Left" Margin="214,271,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button Name="add_sales_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="235,322,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="add_sales_car_button_Click"/>
+        <Button Name="add_sales_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="260,322,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="add_sales_car_button_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="100,55,0,0" TextWrapping="Wrap" Text="Firm" VerticalAlignment="Top" Height="23" Width="72"/>
         <TextBlock HorizontalAlignment="Left" Margin="100,99,0,0" TextWrapping="Wrap" Text="Model" VerticalAlignment="Top" Height="23" Width="72"/>
         <TextBlock HorizontalAlignment="Left" Margin="100,141,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Height="23" Width="72"/>
