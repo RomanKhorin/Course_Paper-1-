@@ -39,6 +39,11 @@ namespace AutoCenter
         /// </summary>
         public int CurrentCenter { get; set; }
 
+        /// <summary>
+        /// Id текущей машины на продажу
+        /// </summary>
+        public int CurrentSalesCarId { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -391,11 +396,11 @@ namespace AutoCenter
             {
                 listbox.Items.Clear();
                 connection.Open();
-                var sales_cars = new SqlCommand("select Firm, Model from [Sales_Car] where Center_Id like " + CurrentCenter, connection);
+                var sales_cars = new SqlCommand("select VIN, Firm, Model from [Sales_Car] where Center_Id like " + CurrentCenter, connection);
                 reader = sales_cars.ExecuteReader();
 
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1));
+                    listbox.Items.Add(reader.GetString(0) + " (" + reader.GetString(1)+ " " + reader.GetString(2) +")");
 
                 connection.Close();
             }
@@ -477,11 +482,13 @@ namespace AutoCenter
                     if (String.IsNullOrEmpty(sc_wind.firm_textbox.Text) == false &&
                             String.IsNullOrEmpty(sc_wind.model_textbox.Text) == false &&
                                 sc_wind.center_combobox.SelectedItem != null &&
-                                    InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
+                                    String.IsNullOrEmpty(sc_wind.VIN_textbox.Text) == false &&
+                                        InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
                     {
                         Connection.Open();
-                        cmd = new SqlCommand("insert into [Sales_Car] (Firm, Model, Colour, Engine, Country, Center_Id) " +
-                                "values (@Firm, @Model, @Colour, @Engine, @Country, @Center_Id)", Connection);
+                        cmd = new SqlCommand("insert into [Sales_Car] (VIN, Firm, Model, Colour, Engine, Country, Center_Id) " +
+                                "values (@VIN, @Firm, @Model, @Colour, @Engine, @Country, @Center_Id)", Connection);
+                        cmd.Parameters.AddWithValue("@VIN", sc_wind.VIN_textbox.Text);
                         cmd.Parameters.AddWithValue("@Firm", sc_wind.firm_textbox.Text);
                         cmd.Parameters.AddWithValue("@Model", sc_wind.model_textbox.Text);
                         cmd.Parameters.AddWithValue("@Colour", sc_wind.color_textbox.Text);
@@ -508,5 +515,75 @@ namespace AutoCenter
                 Connection.Close();
             }
         }
+
+        /// <summary>
+        /// Метод, который определяет Id машины на продажу через его VIN (идентификационный номер машины)
+        /// </summary>
+        private int GetSalesCarId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            int car_id = 0;
+
+            try
+            {
+                connection.Open();
+                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[0] + "'", connection);
+                reader = id_query.ExecuteReader();
+
+                while (reader.Read())
+                    car_id = reader.GetInt32(0);
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+
+            return car_id;
+        }
+
+        /// <summary>
+        /// Определяет Id выбранного автомобиля на продажу
+        /// </summary>
+        private void sales_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sales_cars_listbox.SelectedItem != null)
+                CurrentSalesCarId = GetSalesCarId(Connection, sales_cars_listbox, reader);
+            else
+                CurrentSalesCarId = 0;
+        }
+
+        /// <summary>
+        /// Метод, который удаляет выбранную машину из базы и системы
+        /// </summary>
+        private void delete_salesCar_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Connection.Open();
+                cmd = new SqlCommand(@"delete from [Sales_Car] where Car_Id like " + CurrentSalesCarId, Connection);
+                cmd.ExecuteNonQuery();
+                Connection.Close();
+
+                GetCarsForSale(Connection, sales_cars_listbox, reader);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+        }
+
+
     }
 }
