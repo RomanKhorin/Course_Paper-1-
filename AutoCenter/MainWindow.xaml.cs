@@ -114,7 +114,7 @@ namespace AutoCenter
                     GetClients(Connection, client_listbox, reader);
                 }
                 else
-                    MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (SqlException ex)
             {
@@ -345,7 +345,7 @@ namespace AutoCenter
                     GetEmps(Connection, emps_listbox, reader);
                 }
                 else
-                    MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (SqlException ex)
             {
@@ -362,7 +362,7 @@ namespace AutoCenter
         /// <summary>
         /// Метод, который получает машины для аренды из базы и заносит их в систему
         /// </summary>
-        private void GetCarsForRent(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        private void GetRentalCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
             try
             {
@@ -390,7 +390,7 @@ namespace AutoCenter
         /// <summary>
         /// Метод, который получает машины на продажу из базы и заносит их в систему
         /// </summary>
-        private void GetCarsForSale(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        private void GetSalesCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
             try
             {
@@ -455,8 +455,8 @@ namespace AutoCenter
             {
                 CurrentEmpId = GetEmpId(Connection, emps_listbox, reader);
                 CurrentCenter = GetCenter(Connection, emps_listbox, reader);
-                GetCarsForRent(Connection, rental_cars_listbox, reader);
-                GetCarsForSale(Connection, sales_cars_listbox, reader);
+                GetRentalCars(Connection, rental_cars_listbox, reader);
+                GetSalesCars(Connection, sales_cars_listbox, reader);
             }
             else
             {
@@ -498,7 +498,7 @@ namespace AutoCenter
                         cmd.ExecuteNonQuery();
                         Connection.Close();
 
-                        GetCarsForSale(Connection, sales_cars_listbox, reader);
+                        GetSalesCars(Connection, sales_cars_listbox, reader);
                     }
                     else
                         MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -565,12 +565,17 @@ namespace AutoCenter
         {
             try
             {
-                Connection.Open();
-                cmd = new SqlCommand(@"delete from [Sales_Car] where Car_Id like " + CurrentSalesCarId, Connection);
-                cmd.ExecuteNonQuery();
-                Connection.Close();
+                if (sales_cars_listbox.SelectedItem != null)
+                {
+                    Connection.Open();
+                    cmd = new SqlCommand(@"delete from [Sales_Car] where Car_Id like " + CurrentSalesCarId, Connection);
+                    cmd.ExecuteNonQuery();
+                    Connection.Close();
 
-                GetCarsForSale(Connection, sales_cars_listbox, reader);
+                    GetSalesCars(Connection, sales_cars_listbox, reader);
+                }
+                else
+                    MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (SqlException ex)
             {
@@ -626,11 +631,42 @@ namespace AutoCenter
                         cmd.ExecuteNonQuery();
                         Connection.Close();
 
-                        GetCarsForRent(Connection, rental_cars_listbox, reader);
+                        GetRentalCars(Connection, rental_cars_listbox, reader);
                     }
                     else
                         MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Метод, который удаляет машину на аренду из базы и системы
+        /// </summary>
+        private void delete_rentalCar_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (rental_cars_listbox.SelectedItem != null)
+                {
+                    Connection.Open();
+                    cmd = new SqlCommand(@"delete from [Rental_Car] where Car_Number like '" + rental_cars_listbox.SelectedItem.ToString().Split(' ')[0] + "'", connection);
+                    cmd.ExecuteNonQuery();
+                    Connection.Close();
+
+                    GetRentalCars(Connection, rental_cars_listbox, reader);
+                }
+                else
+                    MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (SqlException ex)
             {
