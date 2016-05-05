@@ -4,7 +4,7 @@
         Title="MainWindow" Height="535.074" Width="1171.268">
     <Grid>
         <ListBox Name="client_listbox" HorizontalAlignment="Left" Height="347" Margin="13,77,0,0" VerticalAlignment="Top" Width="269"/>
-        <Button Name="add_client_button" Content=" Add&#xA;Client" HorizontalAlignment="Left" Margin="37,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_client_button_Click_1"/>
+        <Button Name="add_client_button" Content=" Add&#xA;Client" HorizontalAlignment="Left" Margin="37,442,0,0" Width="100" Click="add_client_button_Click" Height="36" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="132,54,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="42"/>
         <Button Name="delete_client_button" Content="Delete&#xD;&#xA;Client" HorizontalAlignment="Left" Margin="167,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_client_button_Click"/>
         <ListBox Name="emps_listbox" HorizontalAlignment="Left" Height="347" Margin="306,77,0,0" VerticalAlignment="Top" Width="288" SelectionChanged="emps_listbox_SelectionChanged"/>
@@ -19,5 +19,7 @@
         <Button Name="delete_rentalCar_button" Content="Delete Car&#xD;&#xA;For Rent" HorizontalAlignment="Left" Margin="1035,134,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_rentalCar_button_Click"/>
         <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_salesCar_button_Click"/>
         <Button Name="delete_salesCar_button" Content="Delete Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,392,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_salesCar_button_Click"/>
+        <Button Name="sales_contracts_button" Content="Sales Contracts" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Click="sales_contracts_button_Click" Margin="1,0,0,0"/>
+        <Button Name="rental_contracts_button" Content="Rental Contracts" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
     </Grid>
 </Window>

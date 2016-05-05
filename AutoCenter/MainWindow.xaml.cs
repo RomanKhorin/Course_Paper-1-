@@ -56,7 +56,7 @@ namespace AutoCenter
         /// <summary>
         /// Метод, который добавляет клиента в базу и программу
         /// </summary>
-        private void add_client_button_Click_1(object sender, RoutedEventArgs e)
+        private void add_client_button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -680,6 +680,46 @@ namespace AutoCenter
             }
         }
 
+        /// <summary>
+        ///   Метод, который получает контракты продажи из базы и заносит их в систему
+        /// </summary>
+        private void GetSalesContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            try
+            {
+                connection.Open();
+                var sales_contracts = new SqlCommand("select Customer.First_Name, Customer.Last_Name, " +
+                                                     "Sales_Car.Firm, Sales_Car.Model, " +
+                                                     "Date, Price from [Sales_Contract] sc " +
+                                                     "inner join [Sales_Car] on sc.Car_Id = Sales_car.Car_Id " +
+                                                     "inner join [Customer] on sc.Customer_Id = Customer.Customer_Id", connection);
 
+                reader = sales_contracts.ExecuteReader();
+
+                while (reader.Read())
+                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + "/" + reader.GetString(2) + " " + reader.GetString(3) + "/" +
+                        reader.GetDateTime(4).ToShortDateString() + "/" + reader.GetDecimal(5));
+
+                reader.Close();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+        }
+
+        private void sales_contracts_button_Click(object sender, RoutedEventArgs e)
+        {
+            Sales_Contracts_Window scr_window = new Sales_Contracts_Window();
+            GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
+            scr_window.Show();
+        }
     }
 }
