@@ -138,7 +138,7 @@ namespace AutoCenter
             {
                 connection.Open();
                 var id_query = new SqlCommand(("Select Customer_Id from [Customer] where Telephone like '" +
-                    listbox.SelectedItem.ToString().Split(':')[1]) + "'", connection);
+                    listbox.SelectedItem.ToString().Split(' ')[4]) + "'", connection);
                 reader = id_query.ExecuteReader();
                 while (reader.Read())
                     id = reader.GetInt32(0);
@@ -171,7 +171,7 @@ namespace AutoCenter
                 var clients = new SqlCommand(("select First_Name, Last_Name, Birth_Date, Telephone from Customer"), connection);
                 reader = clients.ExecuteReader();
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ")" + " :" +
+                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") : " +
                         reader.GetString(3));
 
                 connection.Close();
@@ -203,7 +203,7 @@ namespace AutoCenter
 
                 reader = emps.ExecuteReader();
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") :" +
+                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") : " +
                         reader.GetString(3));
                 connection.Close();
             }
@@ -230,7 +230,7 @@ namespace AutoCenter
             {
                 connection.Open();
                 var id_query = new SqlCommand(("Select Employee_Id from [Employee] where Telephone like '" +
-                    listbox.SelectedItem.ToString().Split(':')[1]) + "'", connection);
+                    listbox.SelectedItem.ToString().Split(' ')[4]) + "'", connection);
 
                 reader = id_query.ExecuteReader();
                 while (reader.Read())
@@ -372,7 +372,7 @@ namespace AutoCenter
                 reader = rental_cars.ExecuteReader();
 
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " (" + reader.GetString(1) + " " + reader.GetString(2) + ")");
+                    listbox.Items.Add(reader.GetString(1) + " " + reader.GetString(2) + " : " + reader.GetString(0));
                 connection.Close();
             }
             catch (SqlException ex)
@@ -400,7 +400,7 @@ namespace AutoCenter
                 reader = sales_cars.ExecuteReader();
 
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " (" + reader.GetString(1) + " " + reader.GetString(2) + ")");
+                    listbox.Items.Add(reader.GetString(1) + " " + reader.GetString(2) + " : " + reader.GetString(0));
 
                 connection.Close();
             }
@@ -526,7 +526,7 @@ namespace AutoCenter
             try
             {
                 connection.Open();
-                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[0] + "'", connection);
+                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
                 reader = id_query.ExecuteReader();
 
                 while (reader.Read())
@@ -659,7 +659,7 @@ namespace AutoCenter
                 if (rental_cars_listbox.SelectedItem != null)
                 {
                     Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Rental_Car] where Car_Number like '" + rental_cars_listbox.SelectedItem.ToString().Split(' ')[0] + "'", connection);
+                    cmd = new SqlCommand(@"delete from [Rental_Car] where Car_Number like '" + rental_cars_listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
                     cmd.ExecuteNonQuery();
                     Connection.Close();
 
