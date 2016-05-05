@@ -29,10 +29,18 @@ namespace AutoCenter
         SqlCommand cmd;
         SqlDataReader reader;
 
+        Rental_Contracts_Window rc_window;
+        Sales_Contracts_Window scr_window;
+
         /// <summary>
         /// Id текущего сотрудника
         /// </summary>
         public int CurrentEmpId { get; set; }
+
+        /// <summary>
+        /// Id текущего клиента
+        /// </summary>
+        public int CurrentClientId { get; set; }
 
         /// <summary>
         /// Текущий центр продаж
@@ -49,9 +57,74 @@ namespace AutoCenter
             InitializeComponent();
             Connection = connection;
 
+            new_rental_contract_button.IsEnabled = false;
+            new_sales_contract_button.IsEnabled = false;
+
             GetClients(Connection, client_listbox, reader);
             GetEmps(Connection, emps_listbox, reader);
         }
+
+        /// <summary>
+        /// Метод, который получает Id клиента по номеру его телефона
+        /// </summary>
+        private int GetClientId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            int id = 0;
+            try
+            {
+                connection.Open();
+                var id_query = new SqlCommand(("Select Customer_Id from [Customer] where Telephone like '" +
+                    listbox.SelectedItem.ToString().Split(' ')[4]) + "'", connection);
+                reader = id_query.ExecuteReader();
+                while (reader.Read())
+                    id = reader.GetInt32(0);
+                reader.Close();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.Connection.Close();
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Метод, который получает клиентов из базы и добавляет в программу
+        /// </summary>
+        private void GetClients(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            try
+            {
+                listbox.Items.Clear();
+                connection.Open();
+                var clients = new SqlCommand(("select First_Name, Last_Name, Birth_Date, Telephone from Customer"), connection);
+                reader = clients.ExecuteReader();
+                while (reader.Read())
+                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") : " +
+                        reader.GetString(3));
+                reader.Close();
+
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+        }
+
 
         /// <summary>
         /// Метод, который добавляет клиента в базу и программу
@@ -98,6 +171,17 @@ namespace AutoCenter
             }
         }
 
+        /// <summary>
+        /// Метод, который получает Id выбранного клиента из списка
+        /// </summary>
+        private void client_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (client_listbox.SelectedItem != null)
+                CurrentClientId = GetClientId(Connection, client_listbox, reader);
+            else
+                CurrentClientId = 0;
+        }
+
         // Метод работает, но не удаляет из-за связей в Rental_Contract
         private void delete_client_button_Click(object sender, RoutedEventArgs e)
         {
@@ -105,9 +189,8 @@ namespace AutoCenter
             {
                 if (client_listbox.SelectedItem != null)
                 {
-                    int client_id = GetClientId(Connection, client_listbox, reader);
                     Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Customer] where Customer_Id like " + client_id, Connection);
+                    cmd = new SqlCommand(@"delete from [Customer] where Customer_Id like " + CurrentClientId, Connection);
                     cmd.ExecuteNonQuery();
                     Connection.Close();
 
@@ -129,66 +212,6 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает Id клиента по номеру его телефона
-        /// </summary>
-        private int GetClientId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
-        {
-            int id = 0;
-            try
-            {
-                connection.Open();
-                var id_query = new SqlCommand(("Select Customer_Id from [Customer] where Telephone like '" +
-                    listbox.SelectedItem.ToString().Split(' ')[4]) + "'", connection);
-                reader = id_query.ExecuteReader();
-                while (reader.Read())
-                    id = reader.GetInt32(0);
-
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                MainWindow.Connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                MainWindow.Connection.Close();
-            }
-
-            return id;
-        }
-
-        /// <summary>
-        /// Метод, который получает клиентов из базы и добавляет в программу
-        /// </summary>
-        private void GetClients(SqlConnection connection, ListBox listbox, SqlDataReader reader)
-        {
-            try
-            {
-                listbox.Items.Clear();
-                connection.Open();
-                var clients = new SqlCommand(("select First_Name, Last_Name, Birth_Date, Telephone from Customer"), connection);
-                reader = clients.ExecuteReader();
-                while (reader.Read())
-                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") : " +
-                        reader.GetString(3));
-
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-        }
-
-        /// <summary>
         /// Метод, который получает сотрудников центров из базы и добавляет их в программу
         /// </summary>
         private void GetEmps(SqlConnection connection, ListBox listbox, SqlDataReader reader)
@@ -205,6 +228,7 @@ namespace AutoCenter
                 while (reader.Read())
                     listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + " (" + reader.GetDateTime(2).ToShortDateString() + ") : " +
                         reader.GetString(3));
+                reader.Close();
                 connection.Close();
             }
             catch (SqlException ex)
@@ -235,6 +259,7 @@ namespace AutoCenter
                 reader = id_query.ExecuteReader();
                 while (reader.Read())
                     emp_id = reader.GetInt32(0);
+                reader.Close();
                 connection.Close();
             }
             catch (SqlException ex)
@@ -300,34 +325,6 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает центры из базы и добавляет в систему
-        /// </summary>
-        private void GetCenters(SqlConnection connection, ComboBox combobox, SqlDataReader reader)
-        {
-            try
-            {
-                combobox.Items.Clear();
-                connection.Open();
-                var centers = new SqlCommand("select * from [Center]", connection);
-
-                reader = centers.ExecuteReader();
-                while (reader.Read())
-                    combobox.Items.Add(reader.GetInt32(0));
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-        }
-
-        /// <summary>
         /// Метод, который удаляет сотрудника из системы и базы
         /// </summary>
         private void delete_emp_button_Click(object sender, RoutedEventArgs e)
@@ -360,19 +357,20 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает машины для аренды из базы и заносит их в систему
+        /// Метод, который получает центры из базы и добавляет в систему
         /// </summary>
-        private void GetRentalCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        private void GetCenters(SqlConnection connection, ComboBox combobox, SqlDataReader reader)
         {
             try
             {
-                listbox.Items.Clear();
+                combobox.Items.Clear();
                 connection.Open();
-                var rental_cars = new SqlCommand("select Car_Number, Firm, Model from [Rental_Car] where Center_Id like " + CurrentCenter, connection);
-                reader = rental_cars.ExecuteReader();
+                var centers = new SqlCommand("select * from [Center]", connection);
 
+                reader = centers.ExecuteReader();
                 while (reader.Read())
-                    listbox.Items.Add(reader.GetString(1) + " " + reader.GetString(2) + " : " + reader.GetString(0));
+                    combobox.Items.Add(reader.GetInt32(0));
+                reader.Close();
                 connection.Close();
             }
             catch (SqlException ex)
@@ -401,7 +399,7 @@ namespace AutoCenter
 
                 while (reader.Read())
                     listbox.Items.Add(reader.GetString(1) + " " + reader.GetString(2) + " : " + reader.GetString(0));
-
+                reader.Close();
                 connection.Close();
             }
             catch (SqlException ex)
@@ -414,6 +412,38 @@ namespace AutoCenter
                 MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 connection.Close();
             }
+        }
+
+        /// <summary>
+        /// Метод, который определяет Id машины на продажу через его VIN (идентификационный номер машины)
+        /// </summary>
+        private int GetSalesCarId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            int car_id = 0;
+
+            try
+            {
+                connection.Open();
+                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
+                reader = id_query.ExecuteReader();
+
+                while (reader.Read())
+                    car_id = reader.GetInt32(0);
+                reader.Close();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+
+            return car_id;
         }
 
         /// <summary>
@@ -430,6 +460,7 @@ namespace AutoCenter
                 reader = center_query.ExecuteReader();
                 while (reader.Read())
                     center = reader.GetInt32(0);
+                reader.Close();
                 connection.Close();
             }
             catch (SqlException ex)
@@ -517,43 +548,15 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который определяет Id машины на продажу через его VIN (идентификационный номер машины)
-        /// </summary>
-        private int GetSalesCarId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
-        {
-            int car_id = 0;
-
-            try
-            {
-                connection.Open();
-                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
-                reader = id_query.ExecuteReader();
-
-                while (reader.Read())
-                    car_id = reader.GetInt32(0);
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                connection.Close();
-            }
-
-            return car_id;
-        }
-
-        /// <summary>
         /// Определяет Id выбранного автомобиля на продажу
         /// </summary>
         private void sales_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sales_cars_listbox.SelectedItem != null)
+            {
+                new_sales_contract_button.IsEnabled = true;
                 CurrentSalesCarId = GetSalesCarId(Connection, sales_cars_listbox, reader);
+            }
             else
                 CurrentSalesCarId = 0;
         }
@@ -586,6 +589,35 @@ namespace AutoCenter
             {
                 MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Метод, который получает машины для аренды из базы и заносит их в систему
+        /// </summary>
+        private void GetRentalCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            try
+            {
+                listbox.Items.Clear();
+                connection.Open();
+                var rental_cars = new SqlCommand("select Car_Number, Firm, Model from [Rental_Car] where Center_Id like " + CurrentCenter, connection);
+                reader = rental_cars.ExecuteReader();
+
+                while (reader.Read())
+                    listbox.Items.Add(reader.GetString(1) + " " + reader.GetString(2) + " : " + reader.GetString(0));
+                reader.Close();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
             }
         }
 
@@ -683,7 +715,7 @@ namespace AutoCenter
         /// <summary>
         ///   Метод, который получает контракты продажи из базы и заносит их в систему
         /// </summary>
-        private void GetSalesContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        public static void GetSalesContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
             try
             {
@@ -715,11 +747,80 @@ namespace AutoCenter
             }
         }
 
+        /// <summary>
+        /// Метод, который забирает контракты аренды машин из базы и заносит их в систему
+        /// </summary>
+        public static void GetRentalContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        {
+            try
+            {
+                connection.Open();
+                var rental_contracts = new SqlCommand("select Customer.First_Name, Customer.Last_Name, " +
+                                                      "Rental_Car.Firm, Rental_Car.Model, " +
+                                                      "Date_Of_Begin, Date_Of_End, Rental_Contract.Number_of_days, " +
+                                                      "Rental_Contract.Price_Per_Day, Total_Price from [Rental_Contract] " +
+                                                      "inner join [Customer] on Rental_Contract.Customer_Id = Customer.Customer_Id " +
+                                                      "inner join [Rental_Car] on Rental_Contract.Car_Number = Rental_Car.Car_Number", connection);
+                reader = rental_contracts.ExecuteReader();
+                while (reader.Read())
+                    listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + "/" + reader.GetString(2) + " " + reader.GetString(3) + "/" +
+                        reader.GetDateTime(4).ToShortDateString() + "/" + reader.GetDateTime(5).ToShortDateString() + "/" + reader.GetInt32(6) + "/" +
+                        reader.GetDecimal(7) + "/" + reader.GetDecimal(8));
+
+                reader.Close();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Метод, который открывает окно со списком контрактов продажи машин
+        /// </summary>
         private void sales_contracts_button_Click(object sender, RoutedEventArgs e)
         {
-            Sales_Contracts_Window scr_window = new Sales_Contracts_Window();
+            scr_window = new Sales_Contracts_Window();
             GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
             scr_window.Show();
+        }
+
+        /// <summary>
+        /// Метод, который открывает окно со списком контраков аренды машин
+        /// </summary>
+        private void rental_contracts_button_Click(object sender, RoutedEventArgs e)
+        {
+            rc_window = new Rental_Contracts_Window();
+            GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
+            rc_window.Show();
+        }
+
+        /// <summary>
+        /// Метод, который открывает окно добавления контракта продажи после нажатия на соответствующую кнопку
+        /// </summary>
+        private void new_sales_contract_button_Click(object sender, RoutedEventArgs e)
+        {
+            New_Sales_Contract_Window nsc_window = new New_Sales_Contract_Window();
+            nsc_window.car_id_textbox.Text = CurrentSalesCarId.ToString();
+            nsc_window.employee_id_textbox.Text = CurrentEmpId.ToString();
+            nsc_window.client_id_textbox.Text = CurrentClientId.ToString();
+            nsc_window.date_datepicker.SelectedDate = DateTime.Now;
+
+            bool? result = nsc_window.ShowDialog();
+            if (result.Value == true)
+            {
+                scr_window = new Sales_Contracts_Window();
+                GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
+                scr_window.Show();
+                return;
+            }
         }
     }
 }

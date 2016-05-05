@@ -1,0 +1,10 @@
+﻿<Window x:Class="AutoCenter.Rental_Contracts_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rental_Contracts_Window" Height="300" Width="415.809">
+    <Grid>
+        <ListBox Name="rental_contracts_listbox" HorizontalAlignment="Left" Height="213" VerticalAlignment="Top" Width="408"/>
+        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="148,0,0,24" VerticalAlignment="Bottom" Width="96" Height="27"/>
+
+    </Grid>
+</Window>

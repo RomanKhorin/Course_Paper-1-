@@ -69,6 +69,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="New Sales Contract Window.xaml.cs">
+      <DependentUpon>New Sales Contract Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Contracts Window.xaml.cs">
+      <DependentUpon>Rental Contracts Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sales Contracts Window.xaml.cs">
       <DependentUpon>Sales Contracts Window.xaml</DependentUpon>
     </Compile>
@@ -112,6 +118,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="New Sales Contract Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Rental Contracts Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sales Contracts Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
