@@ -552,13 +552,16 @@ namespace AutoCenter
         /// </summary>
         private void sales_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sales_cars_listbox.SelectedItem != null)
+            if (sales_cars_listbox.SelectedItem != null && client_listbox.SelectedItem != null)
             {
                 new_sales_contract_button.IsEnabled = true;
                 CurrentSalesCarId = GetSalesCarId(Connection, sales_cars_listbox, reader);
             }
             else
+            {
+                new_sales_contract_button.IsEnabled = false;
                 CurrentSalesCarId = 0;
+            }
         }
 
         /// <summary>
@@ -821,6 +824,39 @@ namespace AutoCenter
                 scr_window.Show();
                 return;
             }
+        }
+
+        /// <summary>
+        /// Метод, который открывает окно добавления контракта аренды автомобиля после нажатия на соответствующую кнопку
+        /// </summary>
+        private void new_rental_contract_button_Click(object sender, RoutedEventArgs e)
+        {
+            New_Rental_Contract_Window nrc_window = new New_Rental_Contract_Window();
+            nrc_window.car_number_textbox.Text = rental_cars_listbox.SelectedItem.ToString().Split(' ')[3];
+            nrc_window.client_id_textbox.Text = CurrentClientId.ToString();
+            nrc_window.employee_id_textbox.Text = CurrentEmpId.ToString();
+            nrc_window.date_of_begin_datepicker.SelectedDate = DateTime.Now;
+
+            bool? result = nrc_window.ShowDialog();
+            if(result.Value == true)
+            {
+                rc_window = new Rental_Contracts_Window();
+                GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
+                rc_window.Show();
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Метод, который активирует способность нажимать на кнопку добавления нового контракта аренды
+        /// после выбора машины на аренду
+        /// </summary>
+        private void rental_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (client_listbox.SelectedItem != null && rental_cars_listbox.SelectedItem != null)
+                new_rental_contract_button.IsEnabled = true;
+            else
+                new_rental_contract_button.IsEnabled = false;
         }
     }
 }
