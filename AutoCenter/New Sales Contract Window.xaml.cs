@@ -23,6 +23,11 @@ namespace AutoCenter
         public New_Sales_Contract_Window()
         {
             InitializeComponent();
+
+            car_id_textbox.Text = MainWindow.CurrentSalesCarId.ToString();
+            employee_id_textbox.Text = MainWindow.CurrentEmpId.ToString();
+            client_id_textbox.Text = MainWindow.CurrentClientId.ToString();
+            date_datepicker.SelectedDate = DateTime.Now;
         }
 
         /// <summary>

@@ -22,6 +22,7 @@ namespace AutoCenter
         public Rental_Contracts_Window()
         {
             InitializeComponent();
+            MainWindow.GetRentalContracts(MainWindow.Connection, rental_contracts_listbox, MainWindow.reader);
         }
     }
 }

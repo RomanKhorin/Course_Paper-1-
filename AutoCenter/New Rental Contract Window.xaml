@@ -5,7 +5,7 @@
     <Grid>
         <DatePicker Name="date_of_begin_datepicker" HorizontalAlignment="Left" Margin="133,162,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="133,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox Name="price_per_day_textbox" HorizontalAlignment="Left" Height="23" Margin="133,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox MaxLength="22" Name="price_per_day_textbox" HorizontalAlignment="Left" Height="23" Margin="133,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="employee_id_textbox" HorizontalAlignment="Left" Height="23" Margin="133,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,33,0,0" TextWrapping="Wrap" Text="Car Number" VerticalAlignment="Top" Height="23" Width="76"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,75,0,0" TextWrapping="Wrap" Text="Employee Id" VerticalAlignment="Top" Height="23" Width="76"/>

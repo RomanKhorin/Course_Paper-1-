@@ -19,6 +19,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="83,210,0,0" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,249,0,0" TextWrapping="Wrap" Text="Condition" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,287,0,0" TextWrapping="Wrap" Text="Center" VerticalAlignment="Top" Height="23" Width="70"/>
-        <Button Name="add_rental_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="251,333,0,0" VerticalAlignment="Top" Width="101" Height="27" Click="add_rental_car_button_Click"/>
+        <Button IsDefault="True" Name="add_rental_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="251,333,0,0" VerticalAlignment="Top" Width="101" Height="27" Click="add_rental_car_button_Click"/>
     </Grid>
 </Window>

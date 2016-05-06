@@ -22,6 +22,7 @@ namespace AutoCenter
         public Sales_Contracts_Window()
         {
             InitializeComponent();
+            MainWindow.GetSalesContracts(MainWindow.Connection, sales_contracts_listbox, MainWindow.reader);
         }
     }
 }

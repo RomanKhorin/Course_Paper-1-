@@ -27,7 +27,7 @@ namespace AutoCenter
 
 
         SqlCommand cmd;
-        SqlDataReader reader;
+        public static SqlDataReader reader;
 
         Rental_Contracts_Window rc_window;
         Sales_Contracts_Window scr_window;
@@ -35,22 +35,27 @@ namespace AutoCenter
         /// <summary>
         /// Id текущего сотрудника
         /// </summary>
-        public int CurrentEmpId { get; set; }
+        public static int CurrentEmpId { get; set; }
 
         /// <summary>
         /// Id текущего клиента
         /// </summary>
-        public int CurrentClientId { get; set; }
+        public static int CurrentClientId { get; set; }
 
         /// <summary>
         /// Текущий центр продаж
         /// </summary>
-        public int CurrentCenter { get; set; }
+        public static int CurrentCenter { get; set; }
 
         /// <summary>
         /// Id текущей машины на продажу
         /// </summary>
-        public int CurrentSalesCarId { get; set; }
+        public static int CurrentSalesCarId { get; set; }
+
+        /// <summary>
+        /// Номер текущей машины аренды
+        /// </summary>
+        public static string CurrentRentalCarNumber { get; set; }
 
         public MainWindow()
         {
@@ -127,48 +132,16 @@ namespace AutoCenter
 
 
         /// <summary>
-        /// Метод, который добавляет клиента в базу и программу
+        /// Метод, который открывает окно добавления клиента после
+        /// нажатия на соответствующую кнопку
         /// </summary>
         private void add_client_button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Add_Client_Window client_window = new Add_Client_Window();
-                bool? result = client_window.ShowDialog();
+            Add_Client_Window client_window = new Add_Client_Window();
+            bool? result = client_window.ShowDialog();
 
-                if (result.Value == true)
-                {
-                    if (String.IsNullOrEmpty(client_window.client_name_textbox.Text) == false &&
-                            String.IsNullOrEmpty(client_window.client_lastname_textbox.Text) == false &&
-                                client_window.client_dateofbirth_datepicker.SelectedDate != null &&
-                                    InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
-                    {
-                        Connection.Open();
-                        cmd = new SqlCommand("Insert into [Customer] (First_Name, Last_Name, Birth_Date, Telephone) values" +
-                            " (@First_Name, @Last_Name, @Birth_Date, @Telephone)", Connection);
-                        cmd.Parameters.AddWithValue("@First_Name", client_window.client_name_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Last_Name", client_window.client_lastname_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Birth_Date", client_window.client_dateofbirth_datepicker.SelectedDate);
-                        cmd.Parameters.AddWithValue("@Telephone", client_window.client_telephone_textbox.Text);
-                        cmd.ExecuteNonQuery();
-                        Connection.Close();
-
-                        GetClients(Connection, client_listbox, reader);
-                    }
-                    else
-                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
+            if (result.Value == true)
+                GetClients(Connection, client_listbox, reader);
         }
 
         /// <summary>
@@ -277,51 +250,16 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добалвляет новых сотрудников в базу и систему
+        /// Метод, который открывает окно добавления нового сотрудника
+        /// после нажатия на соответствующую кнопку
         /// </summary>
         private void add_emp_button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Add_Employee_Window emp_window = new Add_Employee_Window();
-                GetCenters(Connection, emp_window.emp_center_combobox, reader);
-                bool? result = emp_window.ShowDialog();
-                if (result.Value == true)
-                {
-                    if (String.IsNullOrEmpty(emp_window.emp_name_textbox.Text) == false &&
-                            String.IsNullOrEmpty(emp_window.emp_lastname_textbox.Text) == false &&
-                                String.IsNullOrEmpty(emp_window.emp_phone_textbox.Text) == false &&
-                                    emp_window.emp_datepicker.SelectedDate != null &&
-                                        emp_window.emp_center_combobox.SelectedItem != null &&
-                                            InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
-                    {
-                        Connection.Open();
-                        cmd = new SqlCommand("insert into [Employee] (First_Name, Last_Name, Birth_Date, Center_Id, Telephone) values " +
-                            "(@First_Name, @Last_Name, @Birth_Date, @Center_Id, @Telephone)", Connection);
-                        cmd.Parameters.AddWithValue("@First_Name", emp_window.emp_name_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Last_Name", emp_window.emp_lastname_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Birth_Date", emp_window.emp_datepicker.SelectedDate);
-                        cmd.Parameters.AddWithValue("@Center_Id", emp_window.emp_center_combobox.SelectedItem);
-                        cmd.Parameters.AddWithValue("@Telephone", emp_window.emp_phone_textbox.Text);
-                        cmd.ExecuteNonQuery();
-                        Connection.Close();
+            Add_Employee_Window emp_window = new Add_Employee_Window();
 
-                        GetEmps(Connection, emps_listbox, reader);
-                    }
-                    else
-                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
+            bool? result = emp_window.ShowDialog();
+            if (result.Value == true)
+                GetEmps(Connection, emps_listbox, reader);
         }
 
         /// <summary>
@@ -359,7 +297,7 @@ namespace AutoCenter
         /// <summary>
         /// Метод, который получает центры из базы и добавляет в систему
         /// </summary>
-        private void GetCenters(SqlConnection connection, ComboBox combobox, SqlDataReader reader)
+        public static void GetCenters(SqlConnection connection, ComboBox combobox, SqlDataReader reader)
         {
             try
             {
@@ -497,54 +435,16 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добавляет машину на продажу в систему и базу
+        /// Метод, который открывает окно добавления машины на продажу
+        /// после нажатия на соответствующую кнопку
         /// </summary>
         private void add_salesCar_button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Add_Sales_Car_Window sc_wind = new Add_Sales_Car_Window();
+            Add_Sales_Car_Window sc_wind = new Add_Sales_Car_Window();
 
-                GetCenters(Connection, sc_wind.center_combobox, reader);
-
-                bool? result = sc_wind.ShowDialog();
-                if (result.Value == true)
-                {
-                    if (String.IsNullOrEmpty(sc_wind.firm_textbox.Text) == false &&
-                            String.IsNullOrEmpty(sc_wind.model_textbox.Text) == false &&
-                                sc_wind.center_combobox.SelectedItem != null &&
-                                    String.IsNullOrEmpty(sc_wind.VIN_textbox.Text) == false &&
-                                        InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
-                    {
-                        Connection.Open();
-                        cmd = new SqlCommand("insert into [Sales_Car] (VIN, Firm, Model, Colour, Engine, Country, Center_Id) " +
-                                "values (@VIN, @Firm, @Model, @Colour, @Engine, @Country, @Center_Id)", Connection);
-                        cmd.Parameters.AddWithValue("@VIN", sc_wind.VIN_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Firm", sc_wind.firm_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Model", sc_wind.model_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Colour", sc_wind.color_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Engine", sc_wind.engine_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Country", sc_wind.country_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Center_Id", sc_wind.center_combobox.SelectedItem);
-                        cmd.ExecuteNonQuery();
-                        Connection.Close();
-
-                        GetSalesCars(Connection, sales_cars_listbox, reader);
-                    }
-                    else
-                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
+            bool? result = sc_wind.ShowDialog();
+            if (result.Value == true)
+                GetSalesCars(Connection, sales_cars_listbox, reader);
         }
 
         /// <summary>
@@ -625,63 +525,16 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добавляет машину аренды в базу и систему
+        /// Метод, который открывает окно добавления машины аренды после
+        /// нажатия на соответствующую кнопку
         /// </summary>
         private void add_rentalCar_button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Add_Rental_Car_Window rc_wind = new Add_Rental_Car_Window();
+            Add_Rental_Car_Window rc_wind = new Add_Rental_Car_Window();
 
-                Connection.Open();
-                var condition_query = new SqlCommand("select * from [Condition]", Connection);
-                reader = condition_query.ExecuteReader();
-                while (reader.Read())
-                    rc_wind.condition_combobox.Items.Add(reader.GetInt32(0) + " (" + reader.GetString(1) + ")");
-                Connection.Close();
-
-                GetCenters(Connection, rc_wind.center_combobox, reader);
-
-                bool? result = rc_wind.ShowDialog();
-                if (result.Value == true)
-                {
-                    if (String.IsNullOrEmpty(rc_wind.car_number_textbox.Text) == false &&
-                            String.IsNullOrEmpty(rc_wind.firm_textbox.Text) == false &&
-                                String.IsNullOrEmpty(rc_wind.model_textbox.Text) == false &&
-                                    rc_wind.condition_combobox.SelectedItem != null &&
-                                        rc_wind.center_combobox.SelectedItem != null &&
-                                            InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
-                    {
-                        Connection.Open();
-                        cmd = new SqlCommand("insert into [Rental_Car] (Car_Number, Firm, Model, Colour, Engine, Country, Condition_Number, Center_Id) " +
-                                 "values (@Car_Number, @Firm, @Model, @Colour, @Engine, @Country, @Condition_Number, @Center_Id)", Connection);
-                        cmd.Parameters.AddWithValue("@Car_Number", rc_wind.car_number_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Firm", rc_wind.firm_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Model", rc_wind.model_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Colour", rc_wind.color_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Engine", rc_wind.engine_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Country", rc_wind.country_textbox.Text);
-                        cmd.Parameters.AddWithValue("@Condition_Number", (int.Parse(rc_wind.condition_combobox.SelectedItem.ToString().Split(' ')[0])));
-                        cmd.Parameters.AddWithValue("@Center_Id", rc_wind.center_combobox.SelectedItem);
-                        cmd.ExecuteNonQuery();
-                        Connection.Close();
-
-                        GetRentalCars(Connection, rental_cars_listbox, reader);
-                    }
-                    else
-                        MessageBox.Show("Check the entered data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Connection.Close();
-            }
+            bool? result = rc_wind.ShowDialog();
+            if (result.Value == true)
+                GetRentalCars(Connection, rental_cars_listbox, reader);
         }
 
         /// <summary>
@@ -791,7 +644,6 @@ namespace AutoCenter
         private void sales_contracts_button_Click(object sender, RoutedEventArgs e)
         {
             scr_window = new Sales_Contracts_Window();
-            GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
             scr_window.Show();
         }
 
@@ -801,7 +653,6 @@ namespace AutoCenter
         private void rental_contracts_button_Click(object sender, RoutedEventArgs e)
         {
             rc_window = new Rental_Contracts_Window();
-            GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
             rc_window.Show();
         }
 
@@ -811,16 +662,11 @@ namespace AutoCenter
         private void new_sales_contract_button_Click(object sender, RoutedEventArgs e)
         {
             New_Sales_Contract_Window nsc_window = new New_Sales_Contract_Window();
-            nsc_window.car_id_textbox.Text = CurrentSalesCarId.ToString();
-            nsc_window.employee_id_textbox.Text = CurrentEmpId.ToString();
-            nsc_window.client_id_textbox.Text = CurrentClientId.ToString();
-            nsc_window.date_datepicker.SelectedDate = DateTime.Now;
 
             bool? result = nsc_window.ShowDialog();
             if (result.Value == true)
             {
                 scr_window = new Sales_Contracts_Window();
-                GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
                 scr_window.Show();
                 return;
             }
@@ -832,16 +678,11 @@ namespace AutoCenter
         private void new_rental_contract_button_Click(object sender, RoutedEventArgs e)
         {
             New_Rental_Contract_Window nrc_window = new New_Rental_Contract_Window();
-            nrc_window.car_number_textbox.Text = rental_cars_listbox.SelectedItem.ToString().Split(' ')[3];
-            nrc_window.client_id_textbox.Text = CurrentClientId.ToString();
-            nrc_window.employee_id_textbox.Text = CurrentEmpId.ToString();
-            nrc_window.date_of_begin_datepicker.SelectedDate = DateTime.Now;
 
             bool? result = nrc_window.ShowDialog();
-            if(result.Value == true)
+            if (result.Value == true)
             {
                 rc_window = new Rental_Contracts_Window();
-                GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
                 rc_window.Show();
                 return;
             }
@@ -853,6 +694,11 @@ namespace AutoCenter
         /// </summary>
         private void rental_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (rental_cars_listbox.SelectedItem != null)
+                CurrentRentalCarNumber = rental_cars_listbox.SelectedItem.ToString().Split(' ')[3];
+            else
+                CurrentRentalCarNumber = "";
+
             if (client_listbox.SelectedItem != null && rental_cars_listbox.SelectedItem != null)
                 new_rental_contract_button.IsEnabled = true;
             else
