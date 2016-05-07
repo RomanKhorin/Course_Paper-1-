@@ -35,7 +35,8 @@ namespace AutoCenter
                 if (String.IsNullOrEmpty(client_name_textbox.Text) == false &&
                         String.IsNullOrEmpty(client_lastname_textbox.Text) == false &&
                             client_dateofbirth_datepicker.SelectedDate != null &&
-                                InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US")
+                                InputLanguageManager.Current.CurrentInputLanguage.Name == "en-US" &&
+                                    String.IsNullOrEmpty(client_telephone_textbox.Text) == false)
                 {
                     MainWindow.Connection.Open();
                     SqlCommand cmd = new SqlCommand("Insert into [Customer] (First_Name, Last_Name, Birth_Date, Telephone) values" +
