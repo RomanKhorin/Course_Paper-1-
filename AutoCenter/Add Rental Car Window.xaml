@@ -1,16 +1,17 @@
 ﻿<Window x:Class="AutoCenter.Add_Rental_Car_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add_Rental_Car_Window" Height="411.397" Width="488.603">
+        Title="Add_Rental_Car_Window" Height="411.397" Width="488.603"
+        ResizeMode="NoResize">
     <Grid>
-        <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox MaxLength="20" Name="firm_textbox" HorizontalAlignment="Left" Height="23" Margin="241,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox MaxLength="20" Name="model_textbox" HorizontalAlignment="Left" Height="23" Margin="241,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox MaxLength="20" Name="color_textbox" HorizontalAlignment="Left" Height="23" Margin="241,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox MaxLength="20" Name="engine_textbox" HorizontalAlignment="Left" Height="23" Margin="241,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox MaxLength="20" Name="country_textbox" HorizontalAlignment="Left" Height="23" Margin="241,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name="condition_combobox" HorizontalAlignment="Left" Margin="241,250,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name="center_combobox" HorizontalAlignment="Left" Margin="241,288,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="firm_textbox" HorizontalAlignment="Left" Height="23" Margin="241,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="model_textbox" HorizontalAlignment="Left" Height="23" Margin="241,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="color_textbox" HorizontalAlignment="Left" Height="23" Margin="241,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="engine_textbox" HorizontalAlignment="Left" Height="23" Margin="241,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="country_textbox" HorizontalAlignment="Left" Height="23" Margin="241,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <ComboBox Name="condition_combobox" HorizontalAlignment="Left" Margin="241,250,0,0" VerticalAlignment="Top" Width="185"/>
+        <ComboBox Name="center_combobox" HorizontalAlignment="Left" Margin="241,288,0,0" VerticalAlignment="Top" Width="185"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,10,0,0" TextWrapping="Wrap" Text="Car Number" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,51,0,0" TextWrapping="Wrap" Text="Firm" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,92,0,0" TextWrapping="Wrap" Text="Model" VerticalAlignment="Top" Height="23" Width="70"/>
