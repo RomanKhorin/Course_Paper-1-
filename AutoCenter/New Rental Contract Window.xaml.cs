@@ -37,9 +37,11 @@ namespace AutoCenter
         {
             try
             {
+                decimal checker;
                 if (date_of_begin_datepicker.SelectedDate != null &&
                         date_of_end_datepicker.SelectedDate != null &&
-                            String.IsNullOrEmpty(price_per_day_textbox.Text) == false)
+                            String.IsNullOrEmpty(price_per_day_textbox.Text) == false &&
+                                decimal.TryParse(price_per_day_textbox.Text, out checker))
                 {
                     MainWindow.Connection.Open();
                     SqlCommand cmd = new SqlCommand("insert into [Rental_Contract] (Car_Number, Customer_Id, Employee_Id, Date_Of_Begin, Date_Of_End, Price_Per_Day) " +
