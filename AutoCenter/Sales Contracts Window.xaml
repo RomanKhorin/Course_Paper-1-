@@ -4,6 +4,6 @@
         Title="Sales_Contracts_Window" Height="300" Width="415.809">
     <Grid>
         <ListBox Name="sales_contracts_listbox" HorizontalAlignment="Left" Height="208" VerticalAlignment="Top" Width="408"/>
-        <Button Name="delete_sales_contract_button" VerticalAlignment="Bottom" Content="Delete Contract" Width="96" Height="27" Margin="150,0,162,29"/>
+        <Button Name="delete_sales_contract_button" VerticalAlignment="Bottom" Content="Delete Contract" Width="96" Height="27" Margin="150,0,162,29" Click="delete_sales_contract_button_Click"/>
     </Grid>
 </Window>

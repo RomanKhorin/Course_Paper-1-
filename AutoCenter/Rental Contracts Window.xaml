@@ -4,7 +4,8 @@
         Title="Rental_Contracts_Window" Height="321" Width="447.809">
     <Grid>
         <ListBox Name="rental_contracts_listbox" HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="440"/>
-        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="171,0,0,10" VerticalAlignment="Bottom" Width="96" Height="27"/>
+        
+        <!--<Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="171,0,0,10" VerticalAlignment="Bottom" Width="96" Height="27" Click="delete_rental_contract_button_Click"/>!-->
 
     </Grid>
 </Window>

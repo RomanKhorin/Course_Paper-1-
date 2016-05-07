@@ -15,7 +15,7 @@
         <TextBox Name="client_id_textbox" HorizontalAlignment="Left" Height="23" Margin="133,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Button IsDefault="True" Name="add_rental_contract_button" Content="Add" HorizontalAlignment="Left" Margin="162,305,0,0" VerticalAlignment="Top" Width="75" Click="add_rental_contract_button_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,212,0,0" TextWrapping="Wrap" Text="Date Of Begin" VerticalAlignment="Top" Height="23" Width="76"/>
-        <DatePicker Name="date_of_end_datepicker" HorizontalAlignment="Left" Margin="133,208,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker Name="date_of_end_datepicker" HorizontalAlignment="Left" Margin="133,208,0,0" VerticalAlignment="Top" Width="120" FirstDayOfWeek="Monday" SelectedDateFormat="Long"/>
 
     </Grid>
 </Window>

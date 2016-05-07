@@ -25,7 +25,6 @@ namespace AutoCenter
 
         public static SqlConnection Connection { get; set; }
 
-
         SqlCommand cmd;
         public static SqlDataReader reader;
 
@@ -575,6 +574,8 @@ namespace AutoCenter
         {
             try
             {
+                listbox.Items.Clear();
+
                 connection.Open();
                 var sales_contracts = new SqlCommand("select Customer.First_Name, Customer.Last_Name, " +
                                                      "Sales_Car.Firm, Sales_Car.Model, " +
@@ -610,6 +611,8 @@ namespace AutoCenter
         {
             try
             {
+                listbox.Items.Clear();
+
                 connection.Open();
                 var rental_contracts = new SqlCommand("select Customer.First_Name, Customer.Last_Name, " +
                                                       "Rental_Car.Firm, Rental_Car.Model, " +

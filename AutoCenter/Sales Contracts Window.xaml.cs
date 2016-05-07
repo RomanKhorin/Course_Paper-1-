@@ -24,5 +24,11 @@ namespace AutoCenter
             InitializeComponent();
             MainWindow.GetSalesContracts(MainWindow.Connection, sales_contracts_listbox, MainWindow.reader);
         }
+
+        // ПРИДУМАТЬ ЛОГИКУ УДАЛЕНИЯ КОНТРАКТОВ ПРОДАЖИ
+        private void delete_sales_contract_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
