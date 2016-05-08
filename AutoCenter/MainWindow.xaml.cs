@@ -686,7 +686,10 @@ namespace AutoCenter
 
             bool? result = nsc_window.ShowDialog();
             if (result.Value == true)
+            {
                 MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
+            }
         }
 
         /// <summary>
@@ -698,7 +701,10 @@ namespace AutoCenter
 
             bool? result = nrc_window.ShowDialog();
             if (result.Value == true)
+            {
                 MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
+            }
         }
 
         /// <summary>

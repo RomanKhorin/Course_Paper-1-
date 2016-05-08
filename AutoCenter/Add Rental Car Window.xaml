@@ -3,7 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add_Rental_Car_Window" Height="422.397" Width="488.603"
         ResizeMode="NoResize">
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Control.Background" Value="#FFB42E"/>
+            <Setter Property="Control.Foreground" Value="Black"/>
+            <Setter Property="Control.BorderBrush" Value="#FFB42E"/>
+            <Setter Property="Control.FontFamily" Value="Calibry"/>
+            <Setter Property="Control.FontSize" Value="14px"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFFFB42E">
         <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
         <TextBox MaxLength="20" Name="firm_textbox" HorizontalAlignment="Left" Height="23" Margin="241,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
         <TextBox MaxLength="20" Name="model_textbox" HorizontalAlignment="Left" Height="23" Margin="241,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>

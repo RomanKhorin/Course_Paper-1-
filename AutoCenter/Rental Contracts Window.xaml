@@ -3,9 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Rental_Contracts_Window" Height="321" Width="447.809"
         ResizeMode="NoResize">
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Control.Background" Value="#FFB42E"/>
+            <Setter Property="Control.Foreground" Value="Black"/>
+            <Setter Property="Control.BorderBrush" Value="#FFB42E"/>
+            <Setter Property="Control.FontFamily" Value="Calibry"/>
+            <Setter Property="Control.FontSize" Value="14px"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFFFB42E">
         <ListBox Name="rental_contracts_listbox" HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="440"/>
-        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="171,0,0,10" VerticalAlignment="Bottom" Width="96" Height="27" Click="delete_rental_contract_button_Click"/>
+        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="168,0,0,10" VerticalAlignment="Bottom" Width="99" Height="33" Click="delete_rental_contract_button_Click" Grid.ColumnSpan="1"/>
 
     </Grid>
 </Window>

@@ -3,7 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add_Employee_Window" Height="348.294" Width="474.265"
         ResizeMode="NoResize">
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Control.Background" Value="#FFB42E"/>
+            <Setter Property="Control.Foreground" Value="Black"/>
+            <Setter Property="Control.BorderBrush" Value="#FFB42E"/>
+            <Setter Property="Control.FontFamily" Value="Calibry"/>
+            <Setter Property="Control.FontSize" Value="14px"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFFFB42E">
         <DatePicker Name="emp_datepicker" HorizontalAlignment="Left" Margin="234,129,0,0" VerticalAlignment="Top" Width="170"/>
         <TextBox MaxLength="20" Name="emp_lastname_textbox" HorizontalAlignment="Left" Height="23" Margin="234,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
         <TextBox MaxLength="20" Name="emp_name_textbox" HorizontalAlignment="Left" Height="23" Margin="234,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
