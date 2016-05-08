@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AutoCenter.Add_Rental_Car_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add_Rental_Car_Window" Height="411.397" Width="488.603"
+        Title="Add_Rental_Car_Window" Height="422.397" Width="488.603"
         ResizeMode="NoResize">
     <Grid>
         <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
@@ -20,6 +20,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="83,210,0,0" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,249,0,0" TextWrapping="Wrap" Text="Condition" VerticalAlignment="Top" Height="23" Width="70"/>
         <TextBlock HorizontalAlignment="Left" Margin="83,287,0,0" TextWrapping="Wrap" Text="Center" VerticalAlignment="Top" Height="23" Width="70"/>
-        <Button IsDefault="True" Name="add_rental_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="251,333,0,0" VerticalAlignment="Top" Width="101" Height="27" Click="add_rental_car_button_Click"/>
+        <Button IsDefault="True" Name="add_rental_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="286,340,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="add_rental_car_button_Click"/>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,36 @@ namespace AutoCenter
         // ПРИДУМАТЬ ЛОГИКУ УДАЛЕНИЯ КОНТРАКТОВ ПРОДАЖИ
         private void delete_sales_contract_button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (sales_contracts_listbox.SelectedItem != null)
+                {
+                    if (MessageBox.Show("Are you sure?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        MainWindow.Connection.Open();
+                        var cmd = new SqlCommand(@"delete from [Sales_Contract] where Date = '" +
+                                                 sales_contracts_listbox.SelectedItem.ToString().Split('/')[2] + "'", MainWindow.Connection);
+                        cmd.ExecuteNonQuery();
+                        MainWindow.Connection.Close();
 
+                        MainWindow.GetRentalContracts(MainWindow.Connection, sales_contracts_listbox, MainWindow.reader);
+                    }
+                    else
+                        return;
+                }
+                else
+                    MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.Connection.Close();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.Connection.Close();
+            }
         }
     }
 }

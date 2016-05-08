@@ -26,8 +26,6 @@ namespace AutoCenter
             MainWindow.GetRentalContracts(MainWindow.Connection, rental_contracts_listbox, MainWindow.reader);
         }
 
-
-        /// НЕ ЗАБУДЬ, ЧТО У ТЕБЯ ЗАКОМЕНЧЕНА ЭТА КНОПКА В XAML
         /// <summary>
         /// Метод, который удаляет выбранный контракт аренды после нажатия на определенную кнопку
         /// </summary>
@@ -37,15 +35,18 @@ namespace AutoCenter
             {
                 if (rental_contracts_listbox.SelectedItem != null)
                 {
-                    MainWindow.Connection.Open();
-                    var cmd = new SqlCommand(@"delete from [Rental_Contract] where Number_Of_Days like " +
-                                             int.Parse(rental_contracts_listbox.SelectedItem.ToString().Split('/')[4]) +
-                                             " and Total_Price like " +
-                                             decimal.Parse(rental_contracts_listbox.SelectedItem.ToString().Split('/')[6]), MainWindow.Connection);
-                    cmd.ExecuteNonQuery();
-                    MainWindow.Connection.Close();
+                    if (MessageBox.Show("Are you sure?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        MainWindow.Connection.Open();
+                        var cmd = new SqlCommand(@"delete from [Rental_Contract] where Date_Of_Begin = '" +
+                                                 rental_contracts_listbox.SelectedItem.ToString().Split('/')[2] + "'", MainWindow.Connection);
+                        cmd.ExecuteNonQuery();
+                        MainWindow.Connection.Close();
 
-                    MainWindow.GetRentalContracts(MainWindow.Connection, rental_contracts_listbox, MainWindow.reader);
+                        MainWindow.GetRentalContracts(MainWindow.Connection, rental_contracts_listbox, MainWindow.reader);
+                    }
+                    else
+                        return;
                 }
                 else
                     MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);

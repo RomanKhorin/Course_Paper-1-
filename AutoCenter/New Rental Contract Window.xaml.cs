@@ -49,7 +49,7 @@ namespace AutoCenter
                     cmd.Parameters.AddWithValue("@Car_Number", car_number_textbox.Text);
                     cmd.Parameters.AddWithValue("@Customer_Id", int.Parse(client_id_textbox.Text));
                     cmd.Parameters.AddWithValue("@Employee_Id", int.Parse(employee_id_textbox.Text));
-                    cmd.Parameters.AddWithValue("@Date_Of_Begin", date_of_begin_datepicker.SelectedDate);
+                    cmd.Parameters.AddWithValue("@Date_Of_Begin", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@Date_Of_End", date_of_end_datepicker.SelectedDate);
                     cmd.Parameters.AddWithValue("@Price_Per_Day", decimal.Parse(price_per_day_textbox.Text));
                     cmd.ExecuteNonQuery();

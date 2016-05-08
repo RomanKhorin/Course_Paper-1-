@@ -48,7 +48,7 @@ namespace AutoCenter
                     cmd.Parameters.AddWithValue("@Car_Id", int.Parse(car_id_textbox.Text));
                     cmd.Parameters.AddWithValue("@Employee_Id", int.Parse(employee_id_textbox.Text));
                     cmd.Parameters.AddWithValue("@Customer_Id", int.Parse(client_id_textbox.Text));
-                    cmd.Parameters.AddWithValue("@Date", date_datepicker.SelectedDate);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@Price", decimal.Parse(price_textbox.Text));
                     cmd.ExecuteNonQuery();
                     MainWindow.Connection.Close();

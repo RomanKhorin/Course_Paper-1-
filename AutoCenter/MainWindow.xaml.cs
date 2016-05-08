@@ -161,12 +161,17 @@ namespace AutoCenter
             {
                 if (client_listbox.SelectedItem != null)
                 {
-                    Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Customer] where Customer_Id like " + CurrentClientId, Connection);
-                    cmd.ExecuteNonQuery();
-                    Connection.Close();
+                    if (MessageBox.Show("You are going to delete a client. All the information about rental and sales contracts connected with this client will be deleted as well. Do you want to delete the client?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand(@"delete from [Customer] where Customer_Id like " + CurrentClientId, Connection);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
 
-                    GetClients(Connection, client_listbox, reader);
+                        GetClients(Connection, client_listbox, reader);
+                    }
+                    else
+                        return;
                 }
                 else
                     MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -270,13 +275,17 @@ namespace AutoCenter
             {
                 if (emps_listbox.SelectedItem != null)
                 {
-                    int emp_id = GetEmpId(Connection, emps_listbox, reader);
-                    Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Employee] where Employee_Id like " + emp_id, Connection);
-                    cmd.ExecuteNonQuery();
-                    Connection.Close();
+                    if (MessageBox.Show("You are going to delete an employee. All the information about rental and sales contracts connected with this employee will be deleted as well. Do you want to delete the employee?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand(@"delete from [Employee] where Employee_Id like " + CurrentEmpId, Connection);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
 
-                    GetEmps(Connection, emps_listbox, reader);
+                        GetEmps(Connection, emps_listbox, reader);
+                    }
+                    else
+                        return;
                 }
                 else
                     MessageBox.Show("You can't delete nothing!", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -386,7 +395,7 @@ namespace AutoCenter
         /// <summary>
         /// Метод, который определяет центр продаж и аренды для выбранного сотрудника
         /// </summary>
-        private int GetCenter(SqlConnection connection, ListBox listbox, SqlDataReader reader)
+        private int GetCenterId(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
             int center = 0;
 
@@ -422,7 +431,7 @@ namespace AutoCenter
             if (emps_listbox.SelectedItem != null)
             {
                 CurrentEmpId = GetEmpId(Connection, emps_listbox, reader);
-                CurrentCenter = GetCenter(Connection, emps_listbox, reader);
+                CurrentCenter = GetCenterId(Connection, emps_listbox, reader);
                 GetRentalCars(Connection, rental_cars_listbox, reader);
                 GetSalesCars(Connection, sales_cars_listbox, reader);
             }
@@ -472,12 +481,17 @@ namespace AutoCenter
             {
                 if (sales_cars_listbox.SelectedItem != null)
                 {
-                    Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Sales_Car] where Car_Id like " + CurrentSalesCarId, Connection);
-                    cmd.ExecuteNonQuery();
-                    Connection.Close();
+                    if (MessageBox.Show("You are going to delete a sales car. All the information about sales contracts connected with this car will be deleted as well. Do you want to delete the car?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand(@"delete from [Sales_Car] where Car_Id like " + CurrentSalesCarId, Connection);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
 
-                    GetSalesCars(Connection, sales_cars_listbox, reader);
+                        GetSalesCars(Connection, sales_cars_listbox, reader);
+                    }
+                    else
+                        return;
                 }
                 else
                     MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -545,12 +559,17 @@ namespace AutoCenter
             {
                 if (rental_cars_listbox.SelectedItem != null)
                 {
-                    Connection.Open();
-                    cmd = new SqlCommand(@"delete from [Rental_Car] where Car_Number like '" + rental_cars_listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
-                    cmd.ExecuteNonQuery();
-                    Connection.Close();
+                    if (MessageBox.Show("You are going to delete a rental car. All the information about rental contracts connected with this car will be deleted as well. Do you want to delete the car?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Connection.Open();
+                        cmd = new SqlCommand(@"delete from [Rental_Car] where Car_Number like '" + rental_cars_listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
+                        cmd.ExecuteNonQuery();
+                        Connection.Close();
 
-                    GetRentalCars(Connection, rental_cars_listbox, reader);
+                        GetRentalCars(Connection, rental_cars_listbox, reader);
+                    }
+                    else
+                        return;
                 }
                 else
                     MessageBox.Show("You can't delete nothing!", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -587,7 +606,7 @@ namespace AutoCenter
 
                 while (reader.Read())
                     listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + "/" + reader.GetString(2) + " " + reader.GetString(3) + "/" +
-                        reader.GetDateTime(4).ToShortDateString() + "/" + reader.GetDecimal(5));
+                        reader.GetDateTime(4).ToString("yyyy-MM-dd HH:mm:ss") + "/" + reader.GetDecimal(5));
 
                 reader.Close();
                 connection.Close();
@@ -623,8 +642,7 @@ namespace AutoCenter
                 reader = rental_contracts.ExecuteReader();
                 while (reader.Read())
                     listbox.Items.Add(reader.GetString(0) + " " + reader.GetString(1) + "/" + reader.GetString(2) + " " + reader.GetString(3) + "/" +
-                        reader.GetDateTime(4).ToShortDateString() + "/" + reader.GetDateTime(5).ToShortDateString() + "/" + reader.GetInt32(6) + "/" +
-                        reader.GetDecimal(7) + "/" + reader.GetDecimal(8));
+                        reader.GetDateTime(4).ToString("yyyy-MM-dd HH:mm:ss") + "/" + reader.GetDateTime(5).ToShortDateString() + "/" + reader.GetDecimal(8));
 
                 reader.Close();
                 connection.Close();
@@ -668,11 +686,7 @@ namespace AutoCenter
 
             bool? result = nsc_window.ShowDialog();
             if (result.Value == true)
-            {
-                scr_window = new Sales_Contracts_Window();
-                scr_window.Show();
-                return;
-            }
+                MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -684,11 +698,7 @@ namespace AutoCenter
 
             bool? result = nrc_window.ShowDialog();
             if (result.Value == true)
-            {
-                rc_window = new Rental_Contracts_Window();
-                rc_window.Show();
-                return;
-            }
+                MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -698,14 +708,17 @@ namespace AutoCenter
         private void rental_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (rental_cars_listbox.SelectedItem != null)
+            {
                 CurrentRentalCarNumber = rental_cars_listbox.SelectedItem.ToString().Split(' ')[3];
-            else
-                CurrentRentalCarNumber = "";
 
-            if (client_listbox.SelectedItem != null && rental_cars_listbox.SelectedItem != null)
-                new_rental_contract_button.IsEnabled = true;
+                if (client_listbox.SelectedItem != null)
+                    new_rental_contract_button.IsEnabled = true;
+            }
             else
+            {
+                CurrentRentalCarNumber = "";
                 new_rental_contract_button.IsEnabled = false;
+            }
         }
     }
 }
