@@ -5,6 +5,9 @@
         ResizeMode="NoResize">
 
     <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Control.Background" Value="#FFB42E"/>
             <Setter Property="Control.Foreground" Value="Black"/>
@@ -35,7 +38,7 @@
         <TextBox MaxLength="22" Name="price_textbox" HorizontalAlignment="Left" Height="23" Margin="133,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
         <TextBox Name="employee_id_textbox" HorizontalAlignment="Left" Height="23" Margin="133,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" IsReadOnly="True"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,33,0,0" TextWrapping="Wrap" Text="Car Id" VerticalAlignment="Top" Height="23" Width="76"/>
-        <TextBlock HorizontalAlignment="Left" Margin="25,75,0,0" TextWrapping="Wrap" Text="Employee Id" VerticalAlignment="Top" Height="23" Width="76"/>
+        <TextBlock HorizontalAlignment="Left" Margin="25,75,0,0" TextWrapping="Wrap" Text="Employee Id" VerticalAlignment="Top" Height="23" Width="86"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,163,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Height="23" Width="76"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,208,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Height="23" Width="76"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,115,0,0" TextWrapping="Wrap" Text="Client Id" VerticalAlignment="Top" Height="23" Width="76"/>

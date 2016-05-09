@@ -5,6 +5,9 @@
         ResizeMode="NoResize">
 
     <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Control.Background" Value="#FFB42E"/>
             <Setter Property="Control.Foreground" Value="Black"/>

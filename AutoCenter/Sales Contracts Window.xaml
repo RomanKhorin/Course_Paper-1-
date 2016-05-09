@@ -31,6 +31,6 @@
     </Window.Resources>
     <Grid Background="#FFFFB42E">
         <ListBox Name="sales_contracts_listbox" HorizontalAlignment="Left" Height="208" VerticalAlignment="Top" Width="408"/>
-        <Button Name="delete_sales_contract_button" VerticalAlignment="Top" Content="Delete Contract" Width="99" Height="31" Margin="149,230,0,0" Click="delete_sales_contract_button_Click" HorizontalAlignment="Left" Grid.ColumnSpan="1"/>
+        <Button Name="delete_sales_contract_button" VerticalAlignment="Top" Content="Delete Contract" Width="408" Height="73" Margin="0,208,0,0" Click="delete_sales_contract_button_Click" HorizontalAlignment="Left" Grid.ColumnSpan="1"/>
     </Grid>
 </Window>

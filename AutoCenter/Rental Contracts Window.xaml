@@ -31,7 +31,7 @@
     </Window.Resources>
     <Grid Background="#FFFFB42E">
         <ListBox Name="rental_contracts_listbox" HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="440"/>
-        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" Margin="168,0,0,10" VerticalAlignment="Bottom" Width="99" Height="33" Click="delete_rental_contract_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="delete_rental_contract_button" Content="Delete Contract" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="442" Height="58" Click="delete_rental_contract_button_Click" Grid.ColumnSpan="1"/>
 
     </Grid>
 </Window>

@@ -31,24 +31,24 @@
 
     <Grid Background="#FFFFB42E">
         <ListBox Name="client_listbox" HorizontalAlignment="Left" Height="347" Margin="13,77,0,0" VerticalAlignment="Top" Width="269" SelectionChanged="client_listbox_SelectionChanged"/>
-        <Button Name="add_client_button" Content=" Add&#xA;Client" HorizontalAlignment="Left" Margin="37,442,0,0" Width="100" Click="add_client_button_Click" Height="36" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="132,54,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="42"/>
-        <Button Name="delete_client_button" Content="Delete&#xD;&#xA;Client" HorizontalAlignment="Left" Margin="167,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_client_button_Click"/>
+        <Button Name="add_client_button" Content=" Add&#xA;Client" HorizontalAlignment="Left" Margin="43,442,0,0" Width="100" Click="add_client_button_Click" Height="36" VerticalAlignment="Top" Grid.ColumnSpan="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="132,54,0,0" TextWrapping="Wrap" Text="Clients" VerticalAlignment="Top" Height="23" Width="42" FontSize="14"/>
+        <Button Name="delete_client_button" Content="Delete&#xD;&#xA;Client" HorizontalAlignment="Left" Margin="143,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_client_button_Click" Grid.ColumnSpan="1"/>
         <ListBox Name="emps_listbox" HorizontalAlignment="Left" Height="347" Margin="306,77,0,0" VerticalAlignment="Top" Width="288" SelectionChanged="emps_listbox_SelectionChanged"/>
-        <Button Name="add_emp_button" Content="Add&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="332,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_emp_button_Click"/>
-        <Button Name="delete_emp_button" Content="Delete&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="465,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_emp_button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="419,54,0,0" TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Height="23" Width="64"/>
+        <Button Name="add_emp_button" Content="Add&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="341,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_emp_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="delete_emp_button" Content="Delete&#xD;&#xA;Employee" HorizontalAlignment="Left" Margin="446,442,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_emp_button_Click" Grid.ColumnSpan="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="419,54,0,0" TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Height="23" Width="64" FontSize="14"/>
         <ListBox Name="rental_cars_listbox" HorizontalAlignment="Left" Height="189" Margin="619,38,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="rental_cars_listbox_SelectionChanged"/>
         <ListBox Name="sales_cars_listbox" HorizontalAlignment="Left" Height="189" Margin="619,285,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="sales_cars_listbox_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="783,15,0,0" TextWrapping="Wrap" Text="Cars for Rent" VerticalAlignment="Top" Height="23" Width="76"/>
-        <TextBlock HorizontalAlignment="Left" Margin="783,262,0,0" TextWrapping="Wrap" Text="Cars for Sale" VerticalAlignment="Top" Height="23" Width="76"/>
-        <Button Name="add_rentalCar_button" Content="Add Car&#xD;&#xA; For Rent" HorizontalAlignment="Left" Margin="1035,77,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_rentalCar_button_Click"/>
-        <Button Name="delete_rentalCar_button" Content="Delete Car&#xD;&#xA;For Rent" HorizontalAlignment="Left" Margin="1035,134,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_rentalCar_button_Click"/>
-        <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="add_salesCar_button_Click"/>
-        <Button Name="delete_salesCar_button" Content="Delete Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,392,0,0" VerticalAlignment="Top" Width="100" Height="36" Click="delete_salesCar_button_Click"/>
-        <Button Name="sales_contracts_button" Content="Sales Contracts" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Click="sales_contracts_button_Click" Margin="1,0,0,0"/>
-        <Button Name="rental_contracts_button" Content="Rental Contracts" HorizontalAlignment="Left" Margin="260,0,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="rental_contracts_button_Click" Grid.ColumnSpan="1"/>
-        <Button Name="new_sales_contract_button" Content="New Sales Contract" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="25" Margin="117,0,0,0" Click="new_sales_contract_button_Click" Grid.ColumnSpan="1"/>
-        <Button Name="new_rental_contract_button" Content="New Rental Contract" HorizontalAlignment="Left" VerticalAlignment="Top" Width="131" Height="25" Margin="383,0,0,0" Click="new_rental_contract_button_Click" Grid.ColumnSpan="1"/>
+        <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="783,15,0,0" TextWrapping="Wrap" Text="Cars for Rent" VerticalAlignment="Top" Height="23" Width="91"/>
+        <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="783,262,0,0" TextWrapping="Wrap" Text="Cars for Sale" VerticalAlignment="Top" Height="23" Width="91"/>
+        <Button Name="add_rentalCar_button" Content="Add Car&#xD;&#xA; For Rent" HorizontalAlignment="Left" Margin="1035,77,0,0" VerticalAlignment="Top" Width="100" Height="50" Click="add_rentalCar_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="delete_rentalCar_button" Content="Delete Car&#xD;&#xA;For Rent" HorizontalAlignment="Left" Margin="1035,127,0,0" VerticalAlignment="Top" Width="100" Height="50" Click="delete_rentalCar_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="add_salesCar_button" Content="Add Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,332,0,0" VerticalAlignment="Top" Width="100" Height="50" Click="add_salesCar_button_Click"/>
+        <Button Name="delete_salesCar_button" Content="Delete Car&#xD;&#xA;For Sale" HorizontalAlignment="Left" Margin="1035,382,0,0" VerticalAlignment="Top" Width="100" Height="50" Click="delete_salesCar_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="sales_contracts_button" Content="Sales Contracts" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Height="38" Click="sales_contracts_button_Click" Margin="1,0,0,0" Grid.ColumnSpan="1"/>
+        <Button Name="rental_contracts_button" Content="Rental Contracts" HorizontalAlignment="Left" Margin="248,0,0,0" VerticalAlignment="Top" Width="118" Height="38" Click="rental_contracts_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="new_sales_contract_button" Content="New Sales Contract" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="38" Margin="105,0,0,0" Click="new_sales_contract_button_Click" Grid.ColumnSpan="1"/>
+        <Button Name="new_rental_contract_button" Content="New Rental Contract" HorizontalAlignment="Left" VerticalAlignment="Top" Width="131" Height="38" Margin="371,0,0,0" Click="new_rental_contract_button_Click" Grid.ColumnSpan="1"/>
     </Grid>
 </Window>

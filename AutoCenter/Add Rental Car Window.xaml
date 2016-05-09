@@ -5,6 +5,9 @@
         ResizeMode="NoResize">
 
     <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Control.Background" Value="#FFB42E"/>
             <Setter Property="Control.Foreground" Value="Black"/>
@@ -30,22 +33,22 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FFFFB42E">
-        <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <TextBox MaxLength="20" Name="firm_textbox" HorizontalAlignment="Left" Height="23" Margin="241,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <TextBox MaxLength="20" Name="model_textbox" HorizontalAlignment="Left" Height="23" Margin="241,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <TextBox MaxLength="20" Name="color_textbox" HorizontalAlignment="Left" Height="23" Margin="241,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <TextBox MaxLength="20" Name="engine_textbox" HorizontalAlignment="Left" Height="23" Margin="241,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <TextBox MaxLength="20" Name="country_textbox" HorizontalAlignment="Left" Height="23" Margin="241,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <ComboBox Name="condition_combobox" HorizontalAlignment="Left" Margin="241,250,0,0" VerticalAlignment="Top" Width="185"/>
-        <ComboBox Name="center_combobox" HorizontalAlignment="Left" Margin="241,288,0,0" VerticalAlignment="Top" Width="185"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,10,0,0" TextWrapping="Wrap" Text="Car Number" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,51,0,0" TextWrapping="Wrap" Text="Firm" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,92,0,0" TextWrapping="Wrap" Text="Model" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,131,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,170,0,0" TextWrapping="Wrap" Text="Engine" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,210,0,0" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,249,0,0" TextWrapping="Wrap" Text="Condition" VerticalAlignment="Top" Height="23" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="83,287,0,0" TextWrapping="Wrap" Text="Center" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBox MaxLength="6" Name="car_number_textbox" HorizontalAlignment="Left" Height="23" Margin="241,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="firm_textbox" HorizontalAlignment="Left" Height="23" Margin="241,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="model_textbox" HorizontalAlignment="Left" Height="23" Margin="241,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="color_textbox" HorizontalAlignment="Left" Height="23" Margin="241,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="engine_textbox" HorizontalAlignment="Left" Height="23" Margin="241,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <TextBox MaxLength="20" Name="country_textbox" HorizontalAlignment="Left" Height="23" Margin="241,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <ComboBox Name="condition_combobox" HorizontalAlignment="Left" Margin="241,259,0,0" VerticalAlignment="Top" Width="185"/>
+        <ComboBox Name="center_combobox" HorizontalAlignment="Left" Margin="241,297,0,0" VerticalAlignment="Top" Width="185"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,19,0,0" TextWrapping="Wrap" Text="Car Number" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,60,0,0" TextWrapping="Wrap" Text="Firm" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,101,0,0" TextWrapping="Wrap" Text="Model" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,140,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,179,0,0" TextWrapping="Wrap" Text="Engine" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,219,0,0" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,258,0,0" TextWrapping="Wrap" Text="Condition" VerticalAlignment="Top" Height="23" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="83,296,0,0" TextWrapping="Wrap" Text="Center" VerticalAlignment="Top" Height="23" Width="70"/>
         <Button IsDefault="True" Name="add_rental_car_button" Content="Add Car" HorizontalAlignment="Left" Margin="286,340,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="add_rental_car_button_Click"/>
     </Grid>
 </Window>
