@@ -460,10 +460,12 @@ namespace AutoCenter
         /// </summary>
         private void sales_cars_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sales_cars_listbox.SelectedItem != null && client_listbox.SelectedItem != null)
+            if (sales_cars_listbox.SelectedItem != null)
             {
-                new_sales_contract_button.IsEnabled = true;
                 CurrentSalesCarId = GetSalesCarId(Connection, sales_cars_listbox, reader);
+
+                if (client_listbox.SelectedItem != null)
+                    new_sales_contract_button.IsEnabled = true;
             }
             else
             {
@@ -688,6 +690,7 @@ namespace AutoCenter
             if (result.Value == true)
             {
                 MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                scr_window = new Sales_Contracts_Window();
                 GetSalesContracts(Connection, scr_window.sales_contracts_listbox, reader);
             }
         }
@@ -703,6 +706,7 @@ namespace AutoCenter
             if (result.Value == true)
             {
                 MessageBox.Show("Contract successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                rc_window = new Rental_Contracts_Window();
                 GetRentalContracts(Connection, rc_window.rental_contracts_listbox, reader);
             }
         }
