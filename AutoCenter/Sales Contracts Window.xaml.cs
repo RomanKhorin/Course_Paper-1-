@@ -26,7 +26,10 @@ namespace AutoCenter
             MainWindow.GetSalesContracts(MainWindow.Connection, sales_contracts_listbox, MainWindow.reader);
         }
 
-        // ПРИДУМАТЬ ЛОГИКУ УДАЛЕНИЯ КОНТРАКТОВ ПРОДАЖИ
+        /// <summary>
+        /// Метод, который удаляет контракт продажи автомобиля из базы данных и системы
+        /// после нажатия на соответствующую кнопку в окне
+        /// </summary>
         private void delete_sales_contract_button_Click(object sender, RoutedEventArgs e)
         {
             try

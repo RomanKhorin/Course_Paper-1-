@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AutoCenter.Sales_Contracts_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sales_Contracts_Window" Height="310" Width="415.809"
+        Title="Sales_Contracts_Window" Height="321" Width="447.809"
         ResizeMode="NoResize">
 
     <Window.Resources>
@@ -30,7 +30,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FFFFB42E">
-        <ListBox Name="sales_contracts_listbox" HorizontalAlignment="Left" Height="208" VerticalAlignment="Top" Width="408"/>
-        <Button Name="delete_sales_contract_button" VerticalAlignment="Top" Content="Delete Contract" Width="408" Height="73" Margin="0,208,0,0" Click="delete_sales_contract_button_Click" HorizontalAlignment="Left" Grid.ColumnSpan="1"/>
+        <ListBox Name="sales_contracts_listbox" HorizontalAlignment="Left" Height="224" VerticalAlignment="Top" Width="440"/>
+        <Button Name="delete_sales_contract_button" VerticalAlignment="Top" Content="Delete Contract" Width="442" Height="58" Margin="0,224,0,0" Click="delete_sales_contract_button_Click" HorizontalAlignment="Left" Grid.ColumnSpan="1"/>
     </Grid>
 </Window>

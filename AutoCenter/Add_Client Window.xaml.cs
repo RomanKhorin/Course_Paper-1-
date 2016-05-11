@@ -26,7 +26,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добавляет клиента в базу и программу
+        /// Метод, который добавляет клиента в базу и систему
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_client_button_Click(object sender, RoutedEventArgs e)
         {

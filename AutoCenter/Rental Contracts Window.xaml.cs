@@ -27,7 +27,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который удаляет выбранный контракт аренды после нажатия на определенную кнопку
+        /// Метод, который удаляет выбранный контракт аренды из базы данных и системы
+        /// после нажатия на соотвтествующую кнопку в окне
         /// </summary>
         private void delete_rental_contract_button_Click(object sender, RoutedEventArgs e)
         {

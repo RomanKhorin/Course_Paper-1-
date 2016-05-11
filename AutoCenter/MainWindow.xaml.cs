@@ -23,6 +23,9 @@ namespace AutoCenter
     {
         private SqlConnection connection = new SqlConnection("Data Source=ROMAPC\\SQLEXPRESS;Initial Catalog=Car_Center;Integrated Security=True");
 
+        /// <summary>
+        /// Строка соединения к базе данных
+        /// </summary>
         public static SqlConnection Connection { get; set; }
 
         SqlCommand cmd;
@@ -100,7 +103,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает клиентов из базы и добавляет в программу
+        /// Метод, который получает клиентов из базы данных и добавляет в систему
         /// </summary>
         private void GetClients(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -154,7 +157,10 @@ namespace AutoCenter
                 CurrentClientId = 0;
         }
 
-        // Метод работает, но не удаляет из-за связей в Rental_Contract
+        /// <summary>
+        /// Метод, который удаляет выбранного клиента из базы данных и системы
+        /// после нажатия на соответствующую кнопку в окне
+        /// </summary>
         private void delete_client_button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -189,7 +195,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает сотрудников центров из базы и добавляет их в программу
+        /// Метод, который получает сотрудников центров из базы данных и добавляет их в систему
         /// </summary>
         private void GetEmps(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -255,7 +261,7 @@ namespace AutoCenter
 
         /// <summary>
         /// Метод, который открывает окно добавления нового сотрудника
-        /// после нажатия на соответствующую кнопку
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_emp_button_Click(object sender, RoutedEventArgs e)
         {
@@ -267,7 +273,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который удаляет сотрудника из системы и базы
+        /// Метод, который удаляет сотрудника из системы и базы данных
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void delete_emp_button_Click(object sender, RoutedEventArgs e)
         {
@@ -303,7 +310,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает центры из базы и добавляет в систему
+        /// Метод, который получает центры из базы данных и добавляет в систему
         /// </summary>
         public static void GetCenters(SqlConnection connection, ComboBox combobox, SqlDataReader reader)
         {
@@ -332,7 +339,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает машины на продажу из базы и заносит их в систему
+        /// Метод, который получает машины на продажу из базы данных и заносит их в систему
         /// </summary>
         private void GetSalesCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -444,7 +451,7 @@ namespace AutoCenter
 
         /// <summary>
         /// Метод, который открывает окно добавления машины на продажу
-        /// после нажатия на соответствующую кнопку
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_salesCar_button_Click(object sender, RoutedEventArgs e)
         {
@@ -475,7 +482,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который удаляет выбранную машину из базы и системы
+        /// Метод, который удаляет выбранную машину из базы данных и системы
         /// </summary>
         private void delete_salesCar_button_Click(object sender, RoutedEventArgs e)
         {
@@ -511,7 +518,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который получает машины для аренды из базы и заносит их в систему
+        /// Метод, который получает машины для аренды из базы данных и заносит их в систему
         /// </summary>
         private void GetRentalCars(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -541,7 +548,7 @@ namespace AutoCenter
 
         /// <summary>
         /// Метод, который открывает окно добавления машины аренды после
-        /// нажатия на соответствующую кнопку
+        /// нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_rentalCar_button_Click(object sender, RoutedEventArgs e)
         {
@@ -553,7 +560,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который удаляет машину на аренду из базы и системы
+        /// Метод, который удаляет машину на аренду из базы данных и системы
         /// </summary>
         private void delete_rentalCar_button_Click(object sender, RoutedEventArgs e)
         {
@@ -589,7 +596,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        ///   Метод, который получает контракты продажи из базы и заносит их в систему
+        ///   Метод, который получает контракты продажи из базы данных и заносит их в систему
         /// </summary>
         public static void GetSalesContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -626,7 +633,7 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который забирает контракты аренды машин из базы и заносит их в систему
+        /// Метод, который забирает контракты аренды машин из базы данных и заносит их в систему
         /// </summary>
         public static void GetRentalContracts(SqlConnection connection, ListBox listbox, SqlDataReader reader)
         {
@@ -663,6 +670,7 @@ namespace AutoCenter
 
         /// <summary>
         /// Метод, который открывает окно со списком контрактов продажи машин
+        /// после нажатия на соответствующую кнопку
         /// </summary>
         private void sales_contracts_button_Click(object sender, RoutedEventArgs e)
         {
@@ -672,6 +680,7 @@ namespace AutoCenter
 
         /// <summary>
         /// Метод, который открывает окно со списком контраков аренды машин
+        /// после нажатия на соответствующую кнопку
         /// </summary>
         private void rental_contracts_button_Click(object sender, RoutedEventArgs e)
         {

@@ -31,7 +31,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который заключает контракт продажи машины и добавляет его в базу
+        /// Метод, который заключает контракт продажи машины и добавляет его в базу данных и систему
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_sales_contract_button_Click(object sender, RoutedEventArgs e)
         {

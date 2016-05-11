@@ -31,7 +31,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который заключает новый контракт аренды и добавляет его в базу и систему
+        /// Метод, который заключает новый контракт аренды и добавляет его в базу данных и систему
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_rental_contract_button_Click(object sender, RoutedEventArgs e)
         {

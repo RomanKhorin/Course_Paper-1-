@@ -28,7 +28,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добалвляет новых сотрудников в базу и систему
+        /// Метод, который добавляет новых сотрудников в базу и систему
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_emp_button_Click(object sender, RoutedEventArgs e)
         {

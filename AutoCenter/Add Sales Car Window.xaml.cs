@@ -28,7 +28,8 @@ namespace AutoCenter
         }
 
         /// <summary>
-        /// Метод, который добавляет машину продажи в систему и базу
+        /// Метод, который добавляет машину продажи в систему и базу 
+        /// после нажатия на соответствующую кнопку в окне
         /// </summary>
         private void add_sales_car_button_Click(object sender, RoutedEventArgs e)
         {
