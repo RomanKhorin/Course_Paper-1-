@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="535.074" Width="1171.268"
+        Icon="car.ico"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="Button">

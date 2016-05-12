@@ -1,7 +1,8 @@
 ﻿<Window x:Class="AutoCenter.New_Rental_Contract_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="New_Rental_Contract_Window" Height="376.103" Width="346"
+        Title="New Rental Contract" Height="376.103" Width="346"
+        Icon="car.ico"
         ResizeMode="NoResize">
 
     <Window.Resources>
