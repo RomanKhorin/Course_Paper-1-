@@ -59,8 +59,11 @@ namespace AutoCenter
         /// </summary>
         public static string CurrentRentalCarNumber { get; set; }
 
+        public static string CurrentSalesCarVIN { get; set; }
+
         public MainWindow()
         {
+            
             InitializeComponent();
             Connection = connection;
 
@@ -69,6 +72,13 @@ namespace AutoCenter
 
             GetClients(Connection, client_listbox, reader);
             GetEmps(Connection, emps_listbox, reader);
+
+            this.Closing += this.App_Closing;
+        }
+
+        private void App_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         /// <summary>
@@ -376,7 +386,7 @@ namespace AutoCenter
             try
             {
                 connection.Open();
-                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + listbox.SelectedItem.ToString().Split(' ')[3] + "'", connection);
+                var id_query = new SqlCommand("select Car_Id from [Sales_Car] where VIN like '" + CurrentSalesCarVIN + "'", connection);
                 reader = id_query.ExecuteReader();
 
                 while (reader.Read())
@@ -468,6 +478,7 @@ namespace AutoCenter
         {
             if (sales_cars_listbox.SelectedItem != null)
             {
+                CurrentSalesCarVIN = sales_cars_listbox.SelectedItem.ToString().Split(' ')[3];
                 CurrentSalesCarId = GetSalesCarId(Connection, sales_cars_listbox, reader);
 
                 if (client_listbox.SelectedItem != null)
@@ -477,6 +488,7 @@ namespace AutoCenter
             {
                 new_sales_contract_button.IsEnabled = false;
                 CurrentSalesCarId = 0;
+                CurrentSalesCarVIN = "";
             }
         }
 

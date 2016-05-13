@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AutoCenter.Add_Employee_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add Employee" Height="348.294" Width="474.265"
+        Title="New Employee" Height="348.294" Width="474.265"
         Icon="car.ico"
         ResizeMode="NoResize">
 
@@ -39,7 +39,7 @@
         <TextBox MaxLength="20" Name="emp_name_textbox" HorizontalAlignment="Left" Height="23" Margin="234,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
         <TextBlock HorizontalAlignment="Left" Margin="90,37,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="23" Width="54"/>
         <TextBlock HorizontalAlignment="Left" Margin="88,83,0,0" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Height="23"/>
-        <TextBlock HorizontalAlignment="Left" Margin="88,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="73"><Run Text="Date Of Birth"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="88,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="93"><Run Text="Date Of Birth"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="90,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" Height="22"><Run Text="Center"/><LineBreak/><Run/></TextBlock>
         <ComboBox Name="emp_center_combobox" HorizontalAlignment="Left" Margin="234,174,0,0" VerticalAlignment="Top" Width="170"/>
         <TextBox MaxLength="20" Name="emp_phone_textbox" HorizontalAlignment="Left" Height="23" Margin="234,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
